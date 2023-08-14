@@ -7,7 +7,6 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <script src="main.js"></script>
 </head>
 
 <body>
@@ -20,41 +19,44 @@
             <div class="flexRowBig">
                 <div class="flexRowSmall">
                     <span class="subTitle">First Name</span>
-                    <input type="text" value="Hasan" name="cardHolderName" id="firstName"></input>
+                    <input type="text" name="cardHolderName" id="firstName"></input>
                 </div>
                 <div class="flexRowSmall">
                     <span class="subTitle">Middle Name</span>
-                    <input type="text" value="Mohammed" name="cardHolderName" id="middleName"></input>
+                    <input type="text" name="cardHolderName" id="middleName"></input>
                 </div>
                 <div class="flexRowSmall">
                     <span class="subTitle">Last Name</span>
-                    <input type="text" value="Alrimawi" name="cardHolderName" id="lastName"></input>
+                    <input type="text" name="cardHolderName" id="lastName"></input>
                 </div>
             </div>
             <div class="flexRowBig">
                 <div class="flexRowSmall">
                     <span class="subTitle">Account Number</span>
-                    <input type="text" value="123456789124578" name="cardDetails" id="accountNumber"></input>
+                    <input type="text" name="cardDetails" id="accountNumber"></input>
                 </div>
                 <div class="flexRowSmall">
                     <span class="subTitle">Expiration Date</span>
-                    <input type="text" value="27/10" name="cardDetails" id="expirationDate"></input>
+                    <input type="text" name="cardDetails" id="expirationDate"></input>
                 </div>
             </div>
 
             <div class="flexRowBig">
                 <div class="flexRowSmall">
                     <span class="subTitle">CCN/CVV</span>
-                    <input type="text" value="1234" name="cardDetails" id="CCN"></input>
+                    <input type="text" name="cardDetails" id="CCN"></input>
                 </div>
                 <div class="flexRowSmall">
                     <span class="subTitle">Country Code</span>
-                    <input type="text" value="012" name="cardDetails" id="countryCode"></input>
+                    <input type="text" name="cardDetails" id="countryCode"></input>
                 </div>
             </div>
-            <button class="button" type="submit" onclick="getTracks()">Read Card</button>
+            <button class="button" onclick="readCard()">Read Card</button>
         </div>
     </section>
+    <script src="model.js"></script>
+    <script src="communicator.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>
