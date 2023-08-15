@@ -1,9 +1,9 @@
 function readCard() {
     tracksRetriever().then((data) => {
-        const string = new CardReaderString(data);
+        const readStripe = new CardReaderReadStripe(data);
         try {
-            const cardDetails = string.extractCardDetails();
-            drawCards(cardDetails);
+            const cardDetails = extractCardDetails(readStripe);
+            autoFillForm(cardDetails);
         }
         catch (err) {
             console.log(err);
@@ -12,28 +12,28 @@ function readCard() {
     })
 }
 
-function drawCards(data) {
-    document.getElementById("firstName").value = data.firstName;
+function autoFillForm(cardDetails) {
+    document.getElementById("firstName").value = cardDetails.firstName;
 
-    if (data.middleName == undefined) {
+    if (cardDetails.middleName == undefined) {
         const middleNameField = document.getElementById("middleName")
         middleNameField.disabled = true;
         middleNameField.value = "Not Required";
     }
     else {
-        document.getElementById("middleName").value = data.middleName;
+        document.getElementById("middleName").value = cardDetails.middleName;
     }
 
-    document.getElementById("lastName").value = data.lastName;
-    document.getElementById("accountNumber").value = data.accountNumber;
-    document.getElementById("expirationDate").value = data.expirationDate;
+    document.getElementById("lastName").value = cardDetails.lastName;
+    document.getElementById("accountNumber").value = cardDetails.accountNumber;
+    document.getElementById("expirationDate").value = cardDetails.expirationDate;
 
-    if (data.countryCode == undefined) {
+    if (cardDetails.countryCode == undefined) {
         const countryCodeField = document.getElementById("countryCode")
         countryCodeField.disabled = true;
         countryCodeField.value = "Not Required";
     }
     else {
-        document.getElementById("countryCode").value = data.countryCode;
+        document.getElementById("countryCode").value = cardDetails.countryCode;
     }
 }
