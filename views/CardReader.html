@@ -1,58 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Credit-Card Reader</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/CardReaderStyle.css" />
-  </head>
 
-  <body>
-    <div class="headerBar">
-      <h1>Credit-Card Reader</h1>
-    </div>
-    <section class="card" id="hello">
-      <div class="card-form">
-        <div class="form-row">
-          <div class="form-group">
-            <span class="label">First Name</span>
-            <input type="text" name="cardHolderName" id="firstName" />
-          </div>
-          <div class="form-group">
-            <span class="label">Middle Name</span>
-            <input type="text" name="cardHolderName" id="middleName" />
-          </div>
-          <div class="form-group">
-            <span class="label">Last Name</span>
-            <input type="text" name="cardHolderName" id="lastName" />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <span class="label">Account Number</span>
-            <input type="text" name="cardDetails" id="accountNumber" />
-          </div>
-          <div class="form-group">
-            <span class="label">Expiration Date</span>
-            <input type="text" name="cardDetails" id="expirationDate" />
-          </div>
-        </div>
+<head>
+  <title>Credit-Card Reader</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styles/CardReaderStyle.css" />
+</head>
 
-        <div class="form-row">
-          <div class="form-group">
-            <span class="label">CCN/CVV</span>
-            <input type="text" name="cardDetails" id="CCN" />
-          </div>
-          <div class="form-group">
-            <span class="label">Country Code</span>
-            <input type="text" name="cardDetails" id="countryCode" />
-          </div>
+<body onload="showPeripheralSelected()">
+  <div class="headerBar">
+    <h1>Credit-Card Reader</h1>
+  </div>
+  <section class="card" id="hello">
+    <custom-peripherals></custom-peripherals>
+    <div class="card-form">
+      <div class="form-row">
+        <div class="form-group">
+          <span class="label">First Name</span>
+          <input type="text" name="cardHolderName" id="firstName" />
         </div>
-        <button class="button" onclick="readCard()">Read Card</button>
+        <div class="form-group">
+          <span class="label">Middle Name</span>
+          <input type="text" name="cardHolderName" id="middleName" />
+        </div>
+        <div class="form-group">
+          <span class="label">Last Name</span>
+          <input type="text" name="cardHolderName" id="lastName" />
+        </div>
       </div>
-    </section>
-    <script src="../models/CardReaderObjects.js"></script>
-    <script src="../communication/communicator.js"></script>
-    <script src="../services/CardReaderExtractor.js"></script>
-    <script src="../controllers/CardReaderController.js"></script>
-  </body>
+      <div class="form-row">
+        <div class="form-group">
+          <span class="label">Account Number</span>
+          <input type="text" name="cardDetails" id="accountNumber" />
+        </div>
+        <div class="form-group">
+          <span class="label">Expiration Date</span>
+          <input type="text" name="cardDetails" id="expirationDate" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <span class="label">CCN/CVV</span>
+          <input type="text" name="cardDetails" id="CCN" />
+        </div>
+        <div class="form-group">
+          <span class="label">Country Code</span>
+          <input type="text" name="cardDetails" id="countryCode" />
+        </div>
+      </div>
+      <button class="button" onclick="readCard()">Read Card</button>
+    </div>
+  </section>
+  <script src="../models/CardReaderObjects.js"></script>
+  <script src="../communication/communicator.js"></script>
+  <script src="../services/CardReaderExtractor.js"></script>
+  <script src="../controllers/CardReaderController.js"></script>
+  <script src="../custom_tags/peripherals.js"></script>
+</body>
+
 </html>

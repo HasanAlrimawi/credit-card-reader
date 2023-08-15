@@ -37,3 +37,9 @@ function autoFillForm(cardDetails) {
         document.getElementById("countryCode").value = cardDetails.countryCode;
     }
 }
+
+function showPeripheralSelected() {
+    const selectedPeripheral = document.getElementById("cardReader")
+    selectedPeripheral.style.color = "#ff9800";
+    selectedPeripheral.style.boxShadow = "0 0 4px rgba(0, 0, 0, 0.1)";
+}
