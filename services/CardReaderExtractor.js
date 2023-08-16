@@ -99,7 +99,7 @@ function extractFirstTrackData(firstTrack) {
     );
   }
 
-  firstTrackData.expiryDate = firstTrack.substring(
+  firstTrackData.expirationDate = firstTrack.substring(
     caretIndex + 1,
     postExpiryDateIndex
   );
@@ -129,7 +129,7 @@ function extractSecondTrackData(secondTrack) {
       postAccountNumberIndex + 1,
       postAccountNumberIndex + 4
     );
-    secondTrackData.expiryDate = secondTrack.substring(
+    secondTrackData.expirationDate = secondTrack.substring(
       postAccountNumberIndex + 4,
       postAccountNumberIndex + 8
     );
@@ -143,7 +143,7 @@ function extractSecondTrackData(secondTrack) {
       );
     }
   } else {
-    secondTrackData.expiryDate = secondTrack.substring(
+    secondTrackData.expirationDate = secondTrack.substring(
       postAccountNumberIndex + 1,
       postAccountNumberIndex + 5
     );
@@ -163,5 +163,6 @@ function extractSecondTrackData(secondTrack) {
     postAccountNumberIndex
   );
 
+  console.log(secondTrackData.expirationDate)
   return secondTrackData;
 }
