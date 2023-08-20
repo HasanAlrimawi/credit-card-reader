@@ -1,18 +1,18 @@
-export const card = (function () {
+export const cardDetails = (function () {
   // private members
-  let cardDetails;
+  let card;
 
-  function getCardInformation() {
-    return cardDetails;
+  function getCardDetails() {
+    return card;
   }
 
-  function setCardInformation(newCardDetails) {
-    cardDetails = newCardDetails;
+  function setCardDetails(newCardDetails) {
+    card = newCardDetails;
   }
 
   // public members
   return {
-    setCardInformation: setCardInformation,
-    getCardInformation: getCardInformation,
+    setCardDetails: setCardDetails,
+    getCardDetails: getCardDetails,
   };
 })();
