@@ -1,4 +1,4 @@
-import { CardInformation } from "/models/CardReaderModel.js";
+import { CardInformation } from "../model/CardInfoClass.js";
 export function extractCardDetails(readStripe) {
   const cardTracks = readStripe.split(";");
   const trackOneData = extractFirstTrackData(cardTracks[0]);

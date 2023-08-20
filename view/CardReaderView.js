@@ -1,18 +1,4 @@
-import { tracksRetriever } from "/communication/communicator.js";
-import { extractCardDetails } from "/services/CardReaderExtractor.js";
-
-function readCard() {
-  tracksRetriever().then((readStripe) => {
-    try {
-      const cardDetails = extractCardDetails(readStripe);
-      autoFillForm(cardDetails);
-    } catch (err) {
-      console.log(err);
-    }
-  });
-}
-
-function autoFillForm(cardDetails) {
+export function autoFillForm(cardDetails) {
   document.getElementById("firstName").value = cardDetails.firstName;
 
   if (cardDetails.middleName == undefined) {
@@ -44,7 +30,4 @@ function showPeripheralSelected() {
 
 document.addEventListener("DOMContentLoaded", () => {
   showPeripheralSelected();
-});
-document.getElementById("readButton").addEventListener("click", () => {
-  readCard();
 });
