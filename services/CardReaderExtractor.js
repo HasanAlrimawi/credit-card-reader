@@ -3,9 +3,9 @@ import { CardInformation } from "../objects/CardInformation.js";
 export const cardDetailsService = (function () {
   function extractCardDetails(readStripe) {
     const cardTracks = readStripe.split(";");
-    const trackOneData = extractFirstTrackData(cardTracks[0]);
-    const trackTwoData = extractSecondTrackData(cardTracks[1]);
-    if (checkCorrespondance(trackOneData, trackTwoData)) {
+    const trackOneData = _extractFirstTrackData(cardTracks[0]);
+    const trackTwoData = _extractSecondTrackData(cardTracks[1]);
+    if (_checkCorrespondance(trackOneData, trackTwoData)) {
       return new CardInformation(
         trackOneData.accountNumber,
         trackOneData.firstName,
@@ -21,7 +21,7 @@ export const cardDetailsService = (function () {
     }
   }
 
-  function checkCorrespondance(trackOneData, trackTwoData) {
+  function _checkCorrespondance(trackOneData, trackTwoData) {
     if (
       trackOneData.accountNumber === trackTwoData.accountNumber &&
       trackOneData.expirationDate === trackTwoData.expirationDate &&
@@ -34,7 +34,7 @@ export const cardDetailsService = (function () {
     }
   }
 
-  function extractFirstTrackData(firstTrack) {
+  function _extractFirstTrackData(firstTrack) {
     firstTrack = firstTrack.replace("%B", "");
     let firstTrackData = {};
     const alphabeticPresence = /[a-z]/i;
@@ -118,7 +118,7 @@ export const cardDetailsService = (function () {
     return firstTrackData;
   }
 
-  function extractSecondTrackData(secondTrack) {
+  function _extractSecondTrackData(secondTrack) {
     secondTrack = secondTrack.replace(";", "");
     let secondTrackData = {};
     const postAccountNumberIndex = secondTrack.lastIndexOf("=");
@@ -165,7 +165,6 @@ export const cardDetailsService = (function () {
       postAccountNumberIndex
     );
 
-    console.log(secondTrackData.expirationDate);
     return secondTrackData;
   }
 

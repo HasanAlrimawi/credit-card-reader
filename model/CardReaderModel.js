@@ -1,13 +1,13 @@
 export const cardDetails = (function () {
   // private members
-  let card;
+  let _card;
 
   function getCardDetails() {
-    return card;
+    return _card;
   }
 
   function setCardDetails(newCardDetails) {
-    card = newCardDetails;
+    _card = newCardDetails;
   }
 
   // public members

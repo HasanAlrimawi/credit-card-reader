@@ -1,4 +1,4 @@
-import { tracksRetriever } from "../communicators/communicator.js";
+import { tracksRetriever } from "../communicators/Communicator.js";
 import { cardDetails } from "../model/CardReaderModel.js";
 import { observer } from "../communicators/Observer.js";
 import { cardReaderView } from "../views/CardReaderView.js";

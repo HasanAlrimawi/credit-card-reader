@@ -1,29 +1,29 @@
 export const observer = (function () {
-  let id = 0;
-  let container = {};
+  let _id = 0;
+  let _container = {};
   const subscribe = function (topic, callbackFunction) {
-    if (!(topic in container)) {
-      container[topic] = [];
+    if (!(topic in _container)) {
+      _container[topic] = [];
     }
-    container[topic].push({
-      id: ++id,
+    _container[topic].push({
+      _id: ++_id,
       functionInCharge: callbackFunction,
     });
-    return id;
+    return _id;
   };
 
-  const unsubscribe = function (topic, id) {
+  const unsubscribe = function (topic, _id) {
     let subscribers = [];
-    for (let subscriber of container[topic]) {
-      if (subscriber.id !== id) {
+    for (let subscriber of _container[topic]) {
+      if (subscriber._id !== _id) {
         subscribers.push(subscriber);
       }
     }
-    container[topic] = subscribers;
+    _container[topic] = subscribers;
   };
 
   const publish = function (topic, data) {
-    for (let subscriber of container[topic]) {
+    for (let subscriber of _container[topic]) {
       subscriber.functionInCharge(data);
     }
   };
