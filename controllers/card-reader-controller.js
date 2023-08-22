@@ -1,8 +1,8 @@
-import { tracksRetriever } from "../communicators/Communicator.js";
-import { cardDetails } from "../model/CardReaderModel.js";
-import { observer } from "../communicators/Observer.js";
-import { cardReaderView } from "../views/CardReaderView.js";
-import { cardDetailsService } from "../services/CardReaderExtractor.js";
+import { tracksRetriever } from "../communicators/communicator.js";
+import { cardDetails } from "../models/card-reader-model.js";
+import { observer } from "../communicators/observer.js";
+import { cardReaderView } from "../views/card-reader-view.js";
+import { cardDetailsService } from "../services/card-reader-extractor.js";
 
 document.getElementById("readButton").addEventListener("click", readCard);
 document.addEventListener("DOMContentLoaded", () => {

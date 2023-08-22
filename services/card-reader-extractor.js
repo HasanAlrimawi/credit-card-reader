@@ -1,4 +1,4 @@
-import { CardInformation } from "../objects/CardInformation.js";
+import { CardInformation } from "../objects-templates/card-information.js";
 
 export const cardDetailsService = (function () {
   function extractCardDetails(readStripe) {

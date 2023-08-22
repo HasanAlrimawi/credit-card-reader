@@ -1,4 +1,4 @@
-import { observer } from "./Observer.js";
+import { observer } from "./observer.js";
 
 setTimeout(() => {
   observer.publish(
