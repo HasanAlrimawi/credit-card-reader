@@ -1,3 +1,10 @@
+/**
+ * This applies the revealing module pattern in order to organize
+ * the access and modification of the model.
+ * 
+ * @returns {function} setCardDetails
+ * @returns {function} getCardDetails
+ */
 export const cardDetails = (function () {
   // private members
   let _card;

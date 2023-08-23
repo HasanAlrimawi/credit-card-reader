@@ -5,8 +5,14 @@ setTimeout(() => {
     "MAGNETIC_CARD_READ",
     "%B1234 5678 9101 1223Alrimawi/Hasan^1226?;1234 5678 9101 1223=1226?"
   );
+  console.log("I PUBLISHED");
 }, 1000);
 
+/**
+ * Simulates card reader device returned data, and returns data within a promise.
+ * 
+ * @returns {Promise} 
+ */
 export const tracksRetriever = function getTracks() {
   return new Promise((resolve, reject) => {
     let tracks =

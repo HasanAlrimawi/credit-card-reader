@@ -1,6 +1,20 @@
 import { CardInformation } from "../models/card-information.js";
 
 export const cardDetailsService = (function () {
+  /**
+   * This receives the read string off the card reader, then extracts and returns the information contained in it.
+   *
+   * It extracts the data from the two tracks one by one, then makes sure that the shared data across the tracks
+   * are the same in order to return the card information or throw exception to indicate some problem
+   * with the card reader or the card itself
+   *
+   * @access public
+   *
+   * @see _extractFirstTrackData, _extractSecondTrackData, _checkCorrespondance
+   *
+   * @param {String} readStripe The string read from the card magnetic stripe's tracks.
+   * @returns {CardInformation} The object containing the final card information extracted from the card's tracks.
+   */
   function extractCardDetails(readStripe) {
     const cardTracks = readStripe.split(";");
     const trackOneData = _extractFirstTrackData(cardTracks[0]);
@@ -21,6 +35,14 @@ export const cardDetailsService = (function () {
     }
   }
 
+  /**
+   * This checks if the shared data across the magnetic stripe's two tracks are the same.
+   *
+   * @access private
+   * @param {Object} trackOneData
+   * @param {Object trackTwoData
+   * @returns {boolean}   Indicates whether the two tracks' shared data are the same.
+   */
   function _checkCorrespondance(trackOneData, trackTwoData) {
     if (
       trackOneData.accountNumber === trackTwoData.accountNumber &&
@@ -34,6 +56,17 @@ export const cardDetailsService = (function () {
     }
   }
 
+  /**
+   * This extracts the plastic money cards' data contained within the string passed to it.
+   *
+   * It uses the fixed structure of data contained within the magnetic stripe's first track,
+   * to extract the data (first name, middle name, last name, expiry date, account number,
+   * country code, optional data) and returns it wrapped up within the object firstTrackData.
+   *
+   * @access private
+   * @param {Object} firstTrack   Contains the read first track string of the magnetic stripe on the plastic money cards.
+   * @returns {Object} firstTrackData   Contains the data extracted from the first track of the magnetic stripe.
+   */
   function _extractFirstTrackData(firstTrack) {
     firstTrack = firstTrack.replace("%B", "");
     let firstTrackData = {};
@@ -45,13 +78,18 @@ export const cardDetailsService = (function () {
     const postExpiryDateIndex = caretIndex + 5;
     const questionMarkIndex = firstTrack.lastIndexOf("?");
     const firstDigitsPairAccountNumber = firstTrack[0] + firstTrack[1];
+
+    // To check if the first two digits of the account number are 59, which means
+    // that the country code exists whithin the track's data
     const countryCodeExists = firstDigitsPairAccountNumber === "59";
 
     if (countryCodeExists) {
+      /** @memberof! firstTrackData */
       firstTrackData.accountNumber = firstTrack.substring(
         0,
         postAccountNumberIndex - 3
       );
+      /** @memberof! firstTrackData */
       firstTrackData.countryCode = firstTrack.substring(
         firstTrackData.accountNumber.length,
         postAccountNumberIndex
@@ -63,12 +101,14 @@ export const cardDetailsService = (function () {
       );
     }
 
+    /** @memberof! firstTrackData */
     firstTrackData.lastName = firstTrack.substring(
       postAccountNumberIndex,
       postLastNameIndex
     );
 
     if (spaceIndex !== -1 && postLastNameIndex < spaceIndex) {
+      /** @memberof! firstTrackData */
       firstTrackData.firstName = firstTrack.substring(
         postLastNameIndex + 1,
         spaceIndex
@@ -80,10 +120,12 @@ export const cardDetailsService = (function () {
         preTitleIndex < caretIndex;
 
       if (titleExists) {
+        /** @memberof! firstTrackData */
         firstTrackData.middleName = firstTrack.substring(
           spaceIndex + 1,
           preTitleIndex
         );
+        /** @memberof! firstTrackData */
         firstTrackData.title = firstTrack.substring(
           preTitleIndex + 1,
           caretIndex
@@ -101,6 +143,7 @@ export const cardDetailsService = (function () {
       );
     }
 
+    /** @memberof! firstTrackData */
     firstTrackData.expirationDate = firstTrack.substring(
       caretIndex + 1,
       postExpiryDateIndex
@@ -109,6 +152,7 @@ export const cardDetailsService = (function () {
     const optionalDataExists = postExpiryDateIndex < questionMarkIndex;
 
     if (optionalDataExists) {
+      /** @memberof! firstTrackData */
       firstTrackData.optionalData = firstTrack.substring(
         postExpiryDateIndex,
         questionMarkIndex
@@ -118,6 +162,17 @@ export const cardDetailsService = (function () {
     return firstTrackData;
   }
 
+  /**
+   * This extracts the plastic money cards' data contained within the string passed to it.
+   *
+   * It uses the fixed structure of data contained within the magnetic stripe's second track,
+   * to extract the data (expiry date, account number, country code, optional data)
+   * and returns it wrapped up within the object secondTrackData.
+   *
+   * @access private
+   * @param {Object} secondTrack   Contains the read second track string of the magnetic stripe on the plastic money cards.
+   * @returns {Object} secondTrackData   Contains the data extracted from the second track of the magnetic stripe.
+   */
   function _extractSecondTrackData(secondTrack) {
     secondTrack = secondTrack.replace(";", "");
     let secondTrackData = {};
@@ -127,10 +182,12 @@ export const cardDetailsService = (function () {
     const countryCodeExists = firstDigitsPairAccountNumber === "59";
 
     if (countryCodeExists) {
+      /** @memberof! secondTrackData */
       secondTrackData.countryCode = secondTrack.substring(
         postAccountNumberIndex + 1,
         postAccountNumberIndex + 4
       );
+      /** @memberof! secondTrackData */
       secondTrackData.expirationDate = secondTrack.substring(
         postAccountNumberIndex + 4,
         postAccountNumberIndex + 8
@@ -139,6 +196,7 @@ export const cardDetailsService = (function () {
       const optionalDataExists = postAccountNumberIndex + 8 != questionIndex;
 
       if (optionalDataExists) {
+        /** @memberof! secondTrackData */
         secondTrackData.optionalData = secondTrack.substring(
           postAccountNumberIndex + 8,
           questionIndex
@@ -160,6 +218,7 @@ export const cardDetailsService = (function () {
       }
     }
 
+    /** @memberof! secondTrackData */
     secondTrackData.accountNumber = secondTrack.substring(
       0,
       postAccountNumberIndex

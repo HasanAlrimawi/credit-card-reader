@@ -1,4 +1,15 @@
 export const cardReaderView = (function () {
+  /**
+   * This fills the card information model data into the corresponding fields.
+   *
+   * It takes the model data, fills in the defined attributes of it,
+   * and disables the fields of the undefined ones.
+   *
+   * @access public
+   * @memberof CardReaderView
+   * 
+   * @param {CardInformation} cardDetails
+   */
   const autoFillForm = function (cardDetails) {
     document.getElementById("firstName").value = cardDetails.firstName;
 
@@ -24,6 +35,11 @@ export const cardReaderView = (function () {
     }
   };
 
+  /**
+   * Highlights the selected peripheral page.
+   * @access public
+   * @memberof CardReaderView
+   */
   const showPeripheralSelected = function () {
     const selectedPeripheral = document.getElementById("cardReader");
     selectedPeripheral.style.color = "#ff9800";
