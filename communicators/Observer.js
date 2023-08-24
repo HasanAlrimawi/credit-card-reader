@@ -53,8 +53,10 @@ export const observer = (function () {
    * @param {Object} data   The wanted data to be passed to the subscibers of the topic
    */
   const publish = function (topic, data) {
-    for (let subscriber of _container[topic]) {
-      subscriber.functionInCharge(data);
+    if (topic in _container) {
+      for (let subscriber of _container[topic]) {
+        subscriber.functionInCharge(data);
+      }
     }
   };
 

@@ -3,12 +3,13 @@ import { observer } from "../communicators/observer.js";
 import { cardReaderView } from "../views/card-reader-view.js";
 import { cardDetailsService } from "../services/card-reader-extractor.js";
 import { tracksRetriever } from "../communicators/communicator.js";
+import { peripheralsTagControl } from "../ui-components/peripherals.js";
 
 document.getElementById("readButton").addEventListener("click", readCard);
 
 // on DOM content loaded the selected peripheral will be highlighted using the specified function
 document.addEventListener("DOMContentLoaded", () => {
-  cardReaderView.showPeripheralSelected();
+  peripheralsTagControl.highlightPeripheralSelected("cardReader");
 });
 
 // When publish function of the observer is executed somewhere then the function specified within the subscribe 

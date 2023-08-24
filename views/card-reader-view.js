@@ -7,7 +7,7 @@ export const cardReaderView = (function () {
    *
    * @access public
    * @memberof CardReaderView
-   * 
+   *
    * @param {CardInformation} cardDetails
    */
   const autoFillForm = function (cardDetails) {
@@ -35,18 +35,7 @@ export const cardReaderView = (function () {
     }
   };
 
-  /**
-   * Highlights the selected peripheral page.
-   * @access public
-   * @memberof CardReaderView
-   */
-  const showPeripheralSelected = function () {
-    const selectedPeripheral = document.getElementById("cardReader");
-    selectedPeripheral.style.color = "#ff9800";
-    selectedPeripheral.style.boxShadow = "0 0 4px rgba(0, 0, 0, 0.1)";
-  };
   return {
     autoFillForm: autoFillForm,
-    showPeripheralSelected: showPeripheralSelected,
   };
 })();
