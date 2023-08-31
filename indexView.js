@@ -2,8 +2,8 @@ export const indexView = (function () {
   /**
    * Updates the title of the page to represent what peripheral is selected.
    *
-   * @public
-   * 
+   * @access public
+   *
    * @param {String} newTitle the name of the device's opened UI
    */
   function updateTitle(newTitle) {
@@ -12,8 +12,8 @@ export const indexView = (function () {
 
   /**
    * Removes the UI of the device that has been opened in order to permit rendering the just selected device.
-   * 
-   * @public
+   *
+   * @access public
    */
   function clearPrecedingDevice() {
     const container = document.getElementById("container");

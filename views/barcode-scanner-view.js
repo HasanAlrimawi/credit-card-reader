@@ -31,7 +31,7 @@ export const barcodeScannerView = (function () {
   /**
    * Renders the barcode scanner page, and rehighlights the peripheral selected.
    *
-   * @public
+   * @access public
    *
    * @see peripheralsTagControl.highlightPeripheralSelected
    */

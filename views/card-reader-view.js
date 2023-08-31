@@ -40,7 +40,7 @@ export const cardReaderView = (function () {
   /**
    * Renders the card reader page, and rehighlights the peripheral selected.
    *
-   * @public
+   * @access public
    *
    * @see peripheralsTagControl.highlightPeripheralSelected
    */

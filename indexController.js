@@ -23,19 +23,10 @@ function renderBarcodeScanner() {
     .getElementById("clearButton")
     .addEventListener("click", barcodeScannerController.clearProductsList);
 
-  const barcodeScannerSubscriberId = observer.subscribe(
-    "BARCODE_NEW_PRODUCT_SCANNED",
-    (productCode) => {
-      barcodeScannerController.addProduct(productCode);
-      publishProductBarcodes;
-    }
-  );
+  barcodeScannerController.makeSubscription();
 
   document.getElementById("cardReader").addEventListener("click", () => {
-    observer.unsubscribe(
-      "BARCODE_NEW_PRODUCT_SCANNED",
-      barcodeScannerSubscriberId
-    );
+    barcodeScannerController.finalizeWork();
   });
 }
 
@@ -44,14 +35,9 @@ function renderCardReader() {
   cardReaderController.renderCardReaderView();
   indexView.updateTitle("Card Reader");
 
-  const cardReaderSubscriberId = observer.subscribe(
-    "MAGNETIC_CARD_READ",
-    (magneticStripeRead) => {
-      cardReaderController.updateCardReaderViewAndModel(magneticStripeRead);
-    }
-  );
+  cardReaderController.makeSubscription();
 
   document.getElementById("barcodeScanner").addEventListener("click", () => {
-    observer.unsubscribe("MAGNETIC_CARD_READ", cardReaderSubscriberId);
+    cardReaderController.finalizeWork();
   });
 }
