@@ -30,8 +30,19 @@ export const barcodeScannerController = (function () {
     barcodeScannerView.clearProductsList();
   };
 
+  /**
+   * Renders the barcode scanner page and rehighlights the peripheral selected.
+   *
+   * @public
+   *
+   */
+  const renderBarcodeScannerView = function () {
+    barcodeScannerView.renderBarcodeScanner();
+  };
+
   return {
     addProduct: addProduct,
     clearProductsList: clearProductsList,
+    renderBarcodeScannerView: renderBarcodeScannerView,
   };
 })();

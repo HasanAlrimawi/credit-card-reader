@@ -1,3 +1,5 @@
+import { peripheralsTagControl } from "../ui-components/peripherals.js";
+
 export const cardReaderView = (function () {
   /**
    * This fills the card information model data into the corresponding fields.
@@ -35,7 +37,59 @@ export const cardReaderView = (function () {
     }
   };
 
+  /**
+   * Renders the card reader page, and rehighlights the peripheral selected.
+   *
+   * @public
+   *
+   * @see peripheralsTagControl.highlightPeripheralSelected
+   */
+  const renderCardReader = function () {
+    document.getElementById("container")?.insertAdjacentHTML(
+      "beforeend",
+      `<div class="card-form">
+      <div class="form-row">
+        <div class="form-group">
+          <span class="label">First Name</span>
+          <input type="text" name="cardHolderName" id="firstName" />
+        </div>
+        <div class="form-group">
+          <span class="label">Middle Name</span>
+          <input type="text" name="cardHolderName" id="middleName" />
+        </div>
+        <div class="form-group">
+          <span class="label">Last Name</span>
+          <input type="text" name="cardHolderName" id="lastName" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <span class="label">Account Number</span>
+          <input type="text" name="cardDetails" id="accountNumber" />
+        </div>
+        <div class="form-group">
+          <span class="label">Expiration Date</span>
+          <input type="text" name="cardDetails" id="expirationDate" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <span class="label">CCN/CVV</span>
+          <input type="text" name="cardDetails" id="CCN" />
+        </div>
+        <div class="form-group">
+          <span class="label">Country Code</span>
+          <input type="text" name="cardDetails" id="countryCode" />
+        </div>
+      </div>
+    </div>`
+    );
+    peripheralsTagControl.highlightPeripheralSelected("cardReader");
+  };
+
   return {
+    renderCardReader: renderCardReader,
     autoFillForm: autoFillForm,
   };
 })();

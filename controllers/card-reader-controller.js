@@ -22,7 +22,19 @@ export const cardReaderController = (function () {
       console.log(err);
     }
   };
+
+  /**
+   * Renders the card reader page and rehighlights the peripheral selected.
+   *
+   * @public
+   *
+   */
+  const renderCardReaderView = function () {
+    cardReaderView.renderCardReader();
+  };
+
   return {
     updateCardReaderViewAndModel: updateCardReaderViewAndModel,
+    renderCardReaderView: renderCardReaderView,
   };
 })();

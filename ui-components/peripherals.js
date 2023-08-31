@@ -20,20 +20,26 @@ export const peripheralsTagControl = (function () {
    * Highlights the selected peripheral page.
    * @access public
    * @memberof peripheralsTagControl
+   * @see _removeHighlighting
    */
   const highlightPeripheralSelected = function (peripheralId) {
-    removeHighlighting();
+    _removeHighlighting();
     const selectedPeripheral = document.getElementById(peripheralId);
     selectedPeripheral.classList.add("selectedPeripheral");
   };
 
-  function removeHighlighting() {
+  /**
+   * Removes any highlighting previously specified for any device.
+   */
+  function _removeHighlighting() {
     document
       .getElementById("cardReader")
       .classList.remove("selectedPeripheral");
+
     document
       .getElementById("eSignature")
       .classList.remove("selectedPeripheral");
+
     document
       .getElementById("barcodeScanner")
       .classList.remove("selectedPeripheral");
