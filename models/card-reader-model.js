@@ -1,7 +1,7 @@
 /**
  * This applies the revealing module pattern in order to organize
  * the access and modification of the model.
- * 
+ *
  * @returns {function} setCardDetails
  * @returns {function} getCardDetails
  */

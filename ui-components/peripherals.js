@@ -7,9 +7,9 @@ class Peripherals extends HTMLElement {
         <div class="subtitle">
           Peripherals
         </div>
-        <a class="label" target="_self" id="cardReader" href="../card-reader.html">Card Reader</a>
-        <a class="label" target="_self" id="eSignature" href="">E-Signature</a>
-        <a class="label" target="_self" id="qrCodeScanner" href="../barcode-scanner.html">QR-Code Scanner</a>
+        <span class="label" id="cardReader">Card Reader</span>
+        <span class="label" id="eSignature">E-Signature</span>
+        <span class="label" id="barcodeScanner">Barcode Scanner</span>
       </div>`;
   }
 }
@@ -22,11 +22,24 @@ export const peripheralsTagControl = (function () {
    * @memberof peripheralsTagControl
    */
   const highlightPeripheralSelected = function (peripheralId) {
+    removeHighlighting();
     const selectedPeripheral = document.getElementById(peripheralId);
-    selectedPeripheral.style.color = "#ff9800";
-    selectedPeripheral.style.boxShadow = "0 0 4px rgba(0, 0, 0, 0.1)";
+    selectedPeripheral.classList.add("selectedPeripheral");
   };
-  return{
-    highlightPeripheralSelected: highlightPeripheralSelected 
+
+  function removeHighlighting() {
+    document
+      .getElementById("cardReader")
+      .classList.remove("selectedPeripheral");
+    document
+      .getElementById("eSignature")
+      .classList.remove("selectedPeripheral");
+    document
+      .getElementById("barcodeScanner")
+      .classList.remove("selectedPeripheral");
+  }
+
+  return {
+    highlightPeripheralSelected: highlightPeripheralSelected,
   };
 })();
