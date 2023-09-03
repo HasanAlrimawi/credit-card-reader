@@ -39,25 +39,24 @@ export const barcodeScannerView = (function () {
     document.getElementById("container")?.insertAdjacentHTML(
       "beforeend",
       `<div class="card-form">
-  <span class="subtitle">Scanned products</span>
-  <ul id="listOfScannedProducts">
-  </ul>
-</div>
-<div class="card-form">
-  <span class="subtitle">Instantanuous Scan</span>
-  <input type="text" id="CCN" disabled="true" />
-  <div class="form-row">
-    <input type="button" id="scanButton" class="button" value="Scan" />
-    <input type="button" id="clearButton" class="button" value="Clear" />
-  </div>
-</div>`
+          <span class="subtitle">Scanned products</span>
+          <ul id="listOfScannedProducts"></ul>
+        </div>
+        <div class="card-form">
+            <span class="subtitle">Instantanuous Scan</span>
+            <input type="text" id="CCN" disabled="true" />
+            <div class="form-row">
+                <input type="button" id="scanButton" class="button" value="Scan" />
+                <input type="button" id="clearButton" class="button" value="Clear" />
+            </div>
+        </div>`
     );
     peripheralsTagControl.highlightPeripheralSelected("barcodeScanner");
   };
 
   return {
-    renderBarcodeScanner: renderBarcodeScanner,
-    clearProductsList: clearProductsList,
-    addProductCode: addProductCode,
+    renderBarcodeScanner,
+    clearProductsList,
+    addProductCode,
   };
 })();

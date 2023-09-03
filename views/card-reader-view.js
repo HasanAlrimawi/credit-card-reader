@@ -2,7 +2,7 @@ import { peripheralsTagControl } from "../ui-components/peripherals.js";
 
 export const cardReaderView = (function () {
   /**
-   * This fills the card information model data into the corresponding fields.
+   * Fills the card information model data into the corresponding fields.
    *
    * It takes the model data, fills in the defined attributes of it,
    * and disables the fields of the undefined ones.
@@ -89,7 +89,7 @@ export const cardReaderView = (function () {
   };
 
   return {
-    renderCardReader: renderCardReader,
-    autoFillForm: autoFillForm,
+    renderCardReader,
+    autoFillForm,
   };
 })();

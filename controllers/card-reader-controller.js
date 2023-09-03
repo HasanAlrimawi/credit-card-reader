@@ -4,6 +4,7 @@ import { cardDetailsService } from "../services/card-reader-extractor.js";
 import { observer } from "../communicators/observer.js";
 
 export const cardReaderController = (function () {
+  /** @type {number} */
   let subscriberId = undefined;
 
   /**
@@ -13,7 +14,7 @@ export const cardReaderController = (function () {
    *
    * @access public
    */
-  const makeSubscription = function () {
+  const _makeSubscription = function () {
     subscriberId = observer.subscribe(
       "MAGNETIC_CARD_READ",
       (magneticStripeRead) => {
@@ -23,7 +24,7 @@ export const cardReaderController = (function () {
   };
 
   /**
-   * Should be called before hiding the Barcode UI, to make important changes before destruction.
+   * Makes important changes to the card reader UI before destruction.
    *
    * Unsubscribes from the observer.
    *
@@ -42,7 +43,7 @@ export const cardReaderController = (function () {
    *
    * @see cardDetailsService.extractCardDetails
    *
-   * @param {String} magneticStripeRead represents the string that is read from the credit card magnetic stripe's tracks
+   * @param {string} magneticStripeRead represents the string that is read from the credit card magnetic stripe's tracks
    */
   const _updateCardReaderViewAndModel = function (magneticStripeRead) {
     try {
@@ -56,18 +57,19 @@ export const cardReaderController = (function () {
   };
 
   /**
-   * Renders the card reader page and rehighlights the peripheral selected.
+   * Renders the card reader page, highlights the peripheral selected, and makes subscription.
    *
    * @access public
    *
+   * @see _makeSubscription
    */
   const renderCardReaderView = function () {
     cardReaderView.renderCardReader();
+    _makeSubscription();
   };
 
   return {
-    makeSubscription: makeSubscription,
-    finalizeWork: finalizeWork,
-    renderCardReaderView: renderCardReaderView,
+    finalizeWork,
+    renderCardReaderView,
   };
 })();

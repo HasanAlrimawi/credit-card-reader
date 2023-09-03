@@ -4,6 +4,7 @@ import { publishProductBarcodes } from "../communicators/communicator.js";
 import { observer } from "../communicators/observer.js";
 
 export const barcodeScannerController = (function () {
+  /** @type {number} */
   let subscriberId = undefined;
 
   /**
@@ -13,7 +14,7 @@ export const barcodeScannerController = (function () {
    *
    * @access public
    */
-  const makeSubscription = function () {
+  const _makeSubscription = function () {
     subscriberId = observer.subscribe(
       "BARCODE_NEW_PRODUCT_SCANNED",
       (productCode) => {
@@ -24,7 +25,7 @@ export const barcodeScannerController = (function () {
   };
 
   /**
-   * Should be called before hiding the Barcode UI, to make important changes before destruction.
+   * Makes important changes to the barcode UI before destruction.
    *
    * Unsubscribes from the observer.
    *
@@ -43,7 +44,7 @@ export const barcodeScannerController = (function () {
    *
    * @see productsList.appendToList, barcodeScannerView.addProductCode
    *
-   * @param {String} productCode the code scanned by the barcode scanner off the product
+   * @param {string} productCode the code scanned by the barcode scanner off the product
    */
   const _addProduct = function (productCode) {
     productsList.appendToList(productCode);
@@ -57,28 +58,31 @@ export const barcodeScannerController = (function () {
    *
    * @see productsList.clearList, barcodeScannerView.clearProductsList
    *
-   * @param {String} productCode
+   * @param {string} productCode
    */
-  const clearProductsList = function () {
+  const _clearProductsList = function () {
     productsList.clearList();
     barcodeScannerView.clearProductsList();
   };
 
   /**
-   * Renders the barcode scanner page and rehighlights the peripheral selected.
+   * Renders the barcode scanner page, highlights the peripheral selected, and makes subscription.
    *
    * @access public
    *
+   * @see _makeSubscription
    */
   const renderBarcodeScannerView = function () {
     barcodeScannerView.renderBarcodeScanner();
+    document
+      .getElementById("clearButton")
+      .addEventListener("click", _clearProductsList);
+
+    _makeSubscription();
   };
 
   return {
-    finalizeWork: finalizeWork,
-    makeSubscription: makeSubscription,
-    _addProduct: _addProduct,
-    clearProductsList: clearProductsList,
-    renderBarcodeScannerView: renderBarcodeScannerView,
+    finalizeWork,
+    renderBarcodeScannerView,
   };
 })();

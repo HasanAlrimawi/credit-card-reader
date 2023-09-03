@@ -1,4 +1,5 @@
 export const productsList = (function () {
+  /** @private {string[]} */
   let _productsScannedList = [];
 
   /**
@@ -22,7 +23,7 @@ export const productsList = (function () {
   }
 
   return {
-    clearList: clearList,
-    appendToList: appendToList,
+    clearList,
+    appendToList,
   };
 })();

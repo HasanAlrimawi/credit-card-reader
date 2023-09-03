@@ -5,18 +5,20 @@ export const observer = (function () {
 
   //public functions
   /**
-   * It adds the topic/event to the container in order to notify the subscribers on publish
+   * Adds the topic/event to the container in order to notify the subscribers on publish.
    *
    * @access public
    *
    * @param {string} topic Which is the name of the topic/event to be notified for.
-   * @param {function} callbackFunction Which is the function that will be executed on publish for every subscriber on the specified topic
+   * @param {function} callbackFunction Function that will be executed
+   *     on publish for every subscriber on the specified topic
    * @returns {number} id Distinct id or every subscriber to permit unsubscription
    */
   const subscribe = function (topic, callbackFunction) {
     if (!(topic in _container)) {
       _container[topic] = [];
     }
+
     _container[topic].push({
       _id: ++_id,
       functionInCharge: callbackFunction,
@@ -25,7 +27,7 @@ export const observer = (function () {
   };
 
   /**
-   * Unsubscibes the subscriber from the topic it subscribed to.
+   * Unsubscribes the subscriber from the topic it subscribed to.
    *
    * @access public
    *
@@ -34,6 +36,7 @@ export const observer = (function () {
    */
   const unsubscribe = function (topic, _id) {
     let subscribers = [];
+
     for (let subscriber of _container[topic]) {
       if (subscriber._id !== _id) {
         subscribers.push(subscriber);
@@ -61,8 +64,8 @@ export const observer = (function () {
   };
 
   return {
-    subscribe: subscribe,
-    unsubscribe: unsubscribe,
-    publish: publish,
+    subscribe,
+    unsubscribe,
+    publish,
   };
 })();

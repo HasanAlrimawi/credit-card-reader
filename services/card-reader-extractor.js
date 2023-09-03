@@ -1,8 +1,11 @@
 import { CardInformation } from "../models/card-information.js";
 
+/**
+ * @file Concerned with converting the data within the credit cards' stripe to understandable and readable data that have meaning.
+ */
 export const cardDetailsService = (function () {
   /**
-   * This receives the read string off the card reader, then extracts and returns the information contained in it.
+   * Receives the read string off the card reader, then extracts and returns the information contained in it.
    *
    * It extracts the data from the two tracks one by one, then makes sure that the shared data across the tracks
    * are the same in order to return the card information or throw exception to indicate some problem
@@ -12,7 +15,7 @@ export const cardDetailsService = (function () {
    *
    * @see _extractFirstTrackData, _extractSecondTrackData, _checkCorrespondance
    *
-   * @param {String} readStripe The string read from the card magnetic stripe's tracks.
+   * @param {string} readStripe The string read from the card magnetic stripe's tracks.
    * @returns {CardInformation} The object containing the final card information extracted from the card's tracks.
    */
   function extractCardDetails(readStripe) {
@@ -36,7 +39,7 @@ export const cardDetailsService = (function () {
   }
 
   /**
-   * This checks if the shared data across the magnetic stripe's two tracks are the same.
+   * Checks if the shared data across the magnetic stripe's two tracks are the same.
    *
    * @access private
    * @param {Object} trackOneData
@@ -57,7 +60,7 @@ export const cardDetailsService = (function () {
   }
 
   /**
-   * This extracts the plastic money cards' data contained within the string passed to it.
+   * Extracts the plastic money cards' data contained within the string passed to it.
    *
    * It uses the fixed structure of data contained within the magnetic stripe's first track,
    * to extract the data (first name, middle name, last name, expiry date, account number,
@@ -163,7 +166,7 @@ export const cardDetailsService = (function () {
   }
 
   /**
-   * This extracts the plastic money cards' data contained within the string passed to it.
+   * Extracts the plastic money cards' data contained within the string passed to it.
    *
    * It uses the fixed structure of data contained within the magnetic stripe's second track,
    * to extract the data (expiry date, account number, country code, optional data)
@@ -228,6 +231,6 @@ export const cardDetailsService = (function () {
   }
 
   return {
-    extractCardDetails: extractCardDetails,
+    extractCardDetails,
   };
 })();
