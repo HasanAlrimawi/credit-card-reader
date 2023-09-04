@@ -7,7 +7,7 @@ export const indexView = (function () {
    * @param {String} newTitle the name of the device's opened UI
    */
   function updateTitle(newTitle) {
-    document.getElementById("openedDevice").innerText = newTitle;
+    document.getElementById("opened-device").innerText = newTitle;
   }
 
   /**

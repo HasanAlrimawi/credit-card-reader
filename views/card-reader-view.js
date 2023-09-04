@@ -1,5 +1,3 @@
-import { peripheralsTagControl } from "../ui-components/peripherals.js";
-
 export const cardReaderView = (function () {
   /**
    * Fills the card information model data into the corresponding fields.
@@ -13,27 +11,27 @@ export const cardReaderView = (function () {
    * @param {CardInformation} cardDetails
    */
   const autoFillForm = function (cardDetails) {
-    document.getElementById("firstName").value = cardDetails.firstName;
+    document.getElementById("first-name").value = cardDetails.firstName;
 
     if (cardDetails.middleName == undefined) {
-      const middleNameField = document.getElementById("middleName");
+      const middleNameField = document.getElementById("middle-name");
       middleNameField.disabled = true;
       middleNameField.value = "Not Required";
     } else {
-      document.getElementById("middleName").value = cardDetails.middleName;
+      document.getElementById("middle-name").value = cardDetails.middleName;
     }
 
-    document.getElementById("lastName").value = cardDetails.lastName;
-    document.getElementById("accountNumber").value = cardDetails.accountNumber;
-    document.getElementById("expirationDate").value =
+    document.getElementById("last-name").value = cardDetails.lastName;
+    document.getElementById("account-number").value = cardDetails.accountNumber;
+    document.getElementById("expiration-date").value =
       cardDetails.expirationDate;
 
     if (cardDetails.countryCode == undefined) {
-      const countryCodeField = document.getElementById("countryCode");
+      const countryCodeField = document.getElementById("country-code");
       countryCodeField.disabled = true;
       countryCodeField.value = "Not Required";
     } else {
-      document.getElementById("countryCode").value = cardDetails.countryCode;
+      document.getElementById("country-code").value = cardDetails.countryCode;
     }
   };
 
@@ -49,25 +47,25 @@ export const cardReaderView = (function () {
       <div class="form-row">
         <div class="form-group">
           <span class="label">First Name</span>
-          <input type="text" name="cardHolderName" id="firstName" />
+          <input type="text" name="cardHolderName" id="first-name" />
         </div>
         <div class="form-group">
           <span class="label">Middle Name</span>
-          <input type="text" name="cardHolderName" id="middleName" />
+          <input type="text" name="cardHolderName" id="middle-name" />
         </div>
         <div class="form-group">
           <span class="label">Last Name</span>
-          <input type="text" name="cardHolderName" id="lastName" />
+          <input type="text" name="cardHolderName" id="last-name" />
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
           <span class="label">Account Number</span>
-          <input type="text" name="cardDetails" id="accountNumber" />
+          <input type="text" name="cardDetails" id="account-number" />
         </div>
         <div class="form-group">
           <span class="label">Expiration Date</span>
-          <input type="text" name="cardDetails" id="expirationDate" />
+          <input type="text" name="cardDetails" id="expiration-date" />
         </div>
       </div>
 
@@ -78,7 +76,7 @@ export const cardReaderView = (function () {
         </div>
         <div class="form-group">
           <span class="label">Country Code</span>
-          <input type="text" name="cardDetails" id="countryCode" />
+          <input type="text" name="cardDetails" id="country-code" />
         </div>
       </div>
     </div>`

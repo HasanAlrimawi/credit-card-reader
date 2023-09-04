@@ -79,7 +79,7 @@ export const barcodeScannerController = (function () {
   const renderBarcodeScannerView = function () {
     barcodeScannerView.renderBarcodeScanner();
     document
-      .getElementById("clearButton")
+      .getElementById("clear-button")
       .addEventListener("click", clearProductsList_);
     makeSubscription_();
   };

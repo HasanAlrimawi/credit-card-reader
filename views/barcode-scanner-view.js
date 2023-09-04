@@ -12,7 +12,7 @@ export const barcodeScannerView = (function () {
     const newProductBarcode = document.createElement("li");
     newProductBarcode.innerHTML = productCode;
     document
-      .getElementById("listOfScannedProducts")
+      .getElementById("list-of-scanned-products")
       .appendChild(newProductBarcode);
   };
 
@@ -23,7 +23,7 @@ export const barcodeScannerView = (function () {
    * @memberof barcodeScannerView
    */
   const clearProductsList = function () {
-    const list = document.getElementById("listOfScannedProducts");
+    const list = document.getElementById("list-of-scanned-products");
     list.innerHTML = "";
   };
 
@@ -38,14 +38,14 @@ export const barcodeScannerView = (function () {
       "beforeend",
       `<div class="card-form">
           <span class="subtitle">Scanned products</span>
-          <ul id="listOfScannedProducts"></ul>
+          <ul id="list-of-scanned-products"></ul>
         </div>
         <div class="card-form">
             <span class="subtitle">Instantanuous Scan</span>
             <input type="text" id="CCN" disabled="true" />
             <div class="form-row">
                 <input type="button" id="scanButton" class="button" value="Scan" />
-                <input type="button" id="clearButton" class="button" value="Clear" />
+                <input type="button" id="clear-button" class="button" value="Clear" />
             </div>
         </div>`
     );

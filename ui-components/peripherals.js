@@ -7,9 +7,9 @@ class Peripherals extends HTMLElement {
         <div class="subtitle">
           Peripherals
         </div>
-        <span class="label" id="cardReader">Card Reader</span>
-        <span class="label" id="eSignature">E-Signature</span>
-        <span class="label" id="barcodeScanner">Barcode Scanner</span>
+        <span class="label" id="card-reader">Card Reader</span>
+        <span class="label" id="e-signature">E-Signature</span>
+        <span class="label" id="barcode-scanner">Barcode Scanner</span>
       </div>`;
   }
 }
@@ -25,7 +25,7 @@ export const peripheralsTagControl = (function () {
   const highlightPeripheralSelected = function (peripheralId) {
     removeHighlighting_();
     const selectedPeripheral = document.getElementById(peripheralId);
-    selectedPeripheral.classList.add("selectedPeripheral");
+    selectedPeripheral.classList.add("selected-peripheral");
   };
 
   /**
@@ -33,16 +33,16 @@ export const peripheralsTagControl = (function () {
    */
   function removeHighlighting_() {
     document
-      .getElementById("cardReader")
-      .classList.remove("selectedPeripheral");
+      .getElementById("card-reader")
+      .classList.remove("selected-peripheral");
 
     document
-      .getElementById("eSignature")
-      .classList.remove("selectedPeripheral");
+      .getElementById("e-signature")
+      .classList.remove("selected-peripheral");
 
     document
-      .getElementById("barcodeScanner")
-      .classList.remove("selectedPeripheral");
+      .getElementById("barcode-scanner")
+      .classList.remove("selected-peripheral");
   }
 
   return {

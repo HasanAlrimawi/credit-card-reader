@@ -55,7 +55,7 @@ body {
   gap: 5px;
 }
 
-input[type="text"] {
+input[type='text'] {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -111,7 +111,7 @@ input[type="text"] {
   color: #3e3e3e;
 }
 
-.selectedPeripheral{
+.selected-peripheral{
   color: #ff9800;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
 }

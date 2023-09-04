@@ -46,6 +46,7 @@ export const cardDetailsService = (function () {
    *     tracks are the same.
    *
    * @access private
+   *
    * @param {Object} trackOneData
    * @param {Object trackTwoData
    * @returns {boolean} Indicates whether the two tracks' shared data
@@ -74,6 +75,7 @@ export const cardDetailsService = (function () {
    *     and returns it wrapped up within the object firstTrackData.
    *
    * @access private
+   *
    * @param {Object} firstTrack Contains the read first track string of
    *     the magnetic stripe on the plastic money cards.
    * @returns {Object} firstTrackData Contains the data extracted from
@@ -184,6 +186,7 @@ export const cardDetailsService = (function () {
    *     up within the object secondTrackData.
    *
    * @access private
+   *
    * @param {Object} secondTrack   Contains the read second track string of the magnetic stripe on the plastic money cards.
    * @returns {Object} secondTrackData   Contains the data extracted from the second track of the magnetic stripe.
    */
