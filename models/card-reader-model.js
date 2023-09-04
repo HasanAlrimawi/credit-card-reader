@@ -7,24 +7,30 @@
  */
 export const cardDetails = (function () {
   /** @private {string} */
-  let _card;
+  let cardDetails_;
 
   /**
    * Returns the private attribute value that holds the card information data.
    *
-   * @returns { CardInformation } the object containing the private attribute representing card information.
+   * @access public
+   *
+   * @returns { CardInformation } the object containing the private attribute
+   *     representing card information.
    */
   function getCardDetails() {
-    return _card;
+    return cardDetails_;
   }
 
   /**
-   * Manipulates the private attribute content that holds the card information data.
+   * Manipulates the private attribute content that holds
+   *     the card information data.
+   *
+   * @access public
    *
    * @param {CardInformation} newCardDetails
    */
   function setCardDetails(newCardDetails) {
-    _card = newCardDetails;
+    cardDetails_ = newCardDetails;
   }
 
   return {

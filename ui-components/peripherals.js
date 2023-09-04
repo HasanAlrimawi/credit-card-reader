@@ -20,10 +20,10 @@ export const peripheralsTagControl = (function () {
    * Highlights the selected peripheral page.
    * @access public
    * @memberof peripheralsTagControl
-   * @see _removeHighlighting
+   * @see removeHighlighting_
    */
   const highlightPeripheralSelected = function (peripheralId) {
-    _removeHighlighting();
+    removeHighlighting_();
     const selectedPeripheral = document.getElementById(peripheralId);
     selectedPeripheral.classList.add("selectedPeripheral");
   };
@@ -31,7 +31,7 @@ export const peripheralsTagControl = (function () {
   /**
    * Removes any highlighting previously specified for any device.
    */
-  function _removeHighlighting() {
+  function removeHighlighting_() {
     document
       .getElementById("cardReader")
       .classList.remove("selectedPeripheral");
@@ -46,6 +46,6 @@ export const peripheralsTagControl = (function () {
   }
 
   return {
-    highlightPeripheralSelected: highlightPeripheralSelected,
+    highlightPeripheralSelected,
   };
 })();

@@ -11,7 +11,8 @@ export const indexView = (function () {
   }
 
   /**
-   * Removes the UI of the device that has been opened in order to permit rendering the just selected device.
+   * Removes the UI of the device that has been opened in order to permit
+   *     rendering the just selected device.
    *
    * @access public
    */

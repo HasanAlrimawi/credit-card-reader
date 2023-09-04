@@ -1,6 +1,6 @@
 export const productsList = (function () {
   /** @private {string[]} */
-  let _productsScannedList = [];
+  let productsScannedList_ = [];
 
   /**
    * Clears the list model object holding the products scanned.
@@ -9,17 +9,18 @@ export const productsList = (function () {
    * @memberof productsList
    */
   function clearList() {
-    _productsScannedList.length = 0;
+    productsScannedList_.length = 0;
   }
 
   /**
-   * Appends the newly scanned product's barcode to the list model object holding the products scanned.
+   * Appends the newly scanned product's barcode to the list model
+   *     object holding the products scanned.
    *
    * @access public
    * @memberof productsList
    */
   function appendToList(newProductScanned) {
-    _productsScannedList.push(newProductScanned);
+    productsScannedList_.push(newProductScanned);
   }
 
   return {

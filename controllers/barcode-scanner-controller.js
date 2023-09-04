@@ -4,21 +4,21 @@ import { publishProductBarcodes } from "../communicators/communicator.js";
 import { observer } from "../communicators/observer.js";
 
 export const barcodeScannerController = (function () {
-  /** @type {number} */
-  let subscriberId = undefined;
+  /** @private {number} */
+  let subscriberId_ = undefined;
 
   /**
    * Subscribes to the observer using the topic specified within.
    *
-   * @see _addProduct, publishProductBarcodes, observer.subscibe
+   * @see addProduct_, publishProductBarcodes, observer.subscribe
    *
    * @access public
    */
-  const _makeSubscription = function () {
-    subscriberId = observer.subscribe(
+  const makeSubscription_ = function () {
+    subscriberId_ = observer.subscribe(
       "BARCODE_NEW_PRODUCT_SCANNED",
       (productCode) => {
-        _addProduct(productCode);
+        addProduct_(productCode);
         publishProductBarcodes;
       }
     );
@@ -34,25 +34,28 @@ export const barcodeScannerController = (function () {
    * @access public
    */
   const finalizeWork = function () {
-    observer.unsubscribe("BARCODE_NEW_PRODUCT_SCANNED", subscriberId);
+    observer.unsubscribe("BARCODE_NEW_PRODUCT_SCANNED", subscriberId_);
   };
 
   /**
-   * Makes the effect of scanning new product's code be reflected on both the model and the view.
+   * Makes the effect of scanning new product's code be reflected on both
+   *     the model and the view.
    *
    * @access private
    *
    * @see productsList.appendToList, barcodeScannerView.addProductCode
    *
-   * @param {string} productCode the code scanned by the barcode scanner off the product
+   * @param {string} productCode the code scanned by the barcode scanner
+   *     off the product
    */
-  const _addProduct = function (productCode) {
+  const addProduct_ = function (productCode) {
     productsList.appendToList(productCode);
     barcodeScannerView.addProductCode(productCode);
   };
 
   /**
-   * Makes the effect of clearing the products' list be reflected on both the model and the view
+   * Makes the effect of clearing the products' list be reflected
+   *     on both the model and the view
    *
    * @access public
    *
@@ -60,25 +63,25 @@ export const barcodeScannerController = (function () {
    *
    * @param {string} productCode
    */
-  const _clearProductsList = function () {
+  const clearProductsList_ = function () {
     productsList.clearList();
     barcodeScannerView.clearProductsList();
   };
 
   /**
-   * Renders the barcode scanner page, highlights the peripheral selected, and makes subscription.
+   * Renders the barcode scanner page, highlights
+   *     the peripheral selected, and makes subscription.
    *
    * @access public
    *
-   * @see _makeSubscription
+   * @see makeSubscription_
    */
   const renderBarcodeScannerView = function () {
     barcodeScannerView.renderBarcodeScanner();
     document
       .getElementById("clearButton")
-      .addEventListener("click", _clearProductsList);
-
-    _makeSubscription();
+      .addEventListener("click", clearProductsList_);
+    makeSubscription_();
   };
 
   return {

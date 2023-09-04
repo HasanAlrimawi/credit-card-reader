@@ -1,6 +1,7 @@
 import { barcodeScannerController } from "./controllers/barcode-scanner-controller.js";
 import { cardReaderController } from "./controllers/card-reader-controller.js";
 import { indexView } from "./indexView.js";
+import { peripheralsTagControl } from "./ui-components/peripherals.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   document
@@ -16,7 +17,7 @@ function renderBarcodeScanner() {
   indexView.clearPrecedingDevice();
   barcodeScannerController.renderBarcodeScannerView();
   indexView.updateTitle("Barcode Scanner");
-
+  peripheralsTagControl.highlightPeripheralSelected("barcodeScanner");
   document
     .getElementById("cardReader")
     .addEventListener("click", barcodeScannerController.finalizeWork, {
@@ -28,7 +29,7 @@ function renderCardReader() {
   indexView.clearPrecedingDevice();
   cardReaderController.renderCardReaderView();
   indexView.updateTitle("Card Reader");
-
+  peripheralsTagControl.highlightPeripheralSelected("cardReader");
   document
     .getElementById("barcodeScanner")
     .addEventListener("click", cardReaderController.finalizeWork, {

@@ -1,8 +1,7 @@
-import { peripheralsTagControl } from "../ui-components/peripherals.js";
-
 export const barcodeScannerView = (function () {
   /**
-   * Appends the newly read product's barcode value into the scanned products list.
+   * Appends the newly read product's barcode value into the scanned
+   *     products list.
    *
    * @access public
    * @memberof barcodeScannerView
@@ -29,11 +28,10 @@ export const barcodeScannerView = (function () {
   };
 
   /**
-   * Renders the barcode scanner page, and rehighlights the peripheral selected.
+   * Renders the barcode scanner page, and rehighlights
+   *     the peripheral selected.
    *
    * @access public
-   *
-   * @see peripheralsTagControl.highlightPeripheralSelected
    */
   const renderBarcodeScanner = function () {
     document.getElementById("container")?.insertAdjacentHTML(
@@ -51,7 +49,6 @@ export const barcodeScannerView = (function () {
             </div>
         </div>`
     );
-    peripheralsTagControl.highlightPeripheralSelected("barcodeScanner");
   };
 
   return {

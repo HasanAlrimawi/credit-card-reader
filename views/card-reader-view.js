@@ -41,8 +41,6 @@ export const cardReaderView = (function () {
    * Renders the card reader page, and rehighlights the peripheral selected.
    *
    * @access public
-   *
-   * @see peripheralsTagControl.highlightPeripheralSelected
    */
   const renderCardReader = function () {
     document.getElementById("container")?.insertAdjacentHTML(
@@ -85,7 +83,6 @@ export const cardReaderView = (function () {
       </div>
     </div>`
     );
-    peripheralsTagControl.highlightPeripheralSelected("cardReader");
   };
 
   return {
