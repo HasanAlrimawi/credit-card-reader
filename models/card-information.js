@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Holds the attributes that are acquired from a magnetic card
+ * stripe's tracks after being read and extracted successfully.
+ */
 export class CardInformation {
   constructor(
     accountNumber,

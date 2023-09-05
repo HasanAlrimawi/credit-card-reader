@@ -1,6 +1,11 @@
 import { CardDetailsException } from "../exceptions/card-details-exception.js";
 import { CardInformation } from "../models/card-information.js";
 
+/**
+ * @fileoverview This module provides functionality to get the data stored on
+ * the magnetic stripe's tracks, wrapped in an object containing the data in
+ * a clear way.
+ */
 export const cardDetailsService = (function () {
   /**
    * Receives the read string off the card reader, then
@@ -11,14 +16,12 @@ export const cardDetailsService = (function () {
    *     the card information or throw exception to indicate some problem
    *     with the card reader or the card itself
    *
-   * @access public
-   *
    * @see extractFirstTrackData_, extractSecondTrackData_, checkCorrespondance_
    *
    * @param {string} readStripe The string read from the card magnetic
-   *     stripe's tracks.
-   * @returns {CardInformation} The object containing the final
-   *     card information extracted from the card's tracks.
+   *     stripe's tracks
+   * @returns {!CardInformation} The object containing the final
+   *     card information extracted from the card's tracks
    */
   function extractCardDetails(readStripe) {
     const cardTracks = readStripe.split(";");
@@ -45,12 +48,10 @@ export const cardDetailsService = (function () {
    * Checks if the shared data across the magnetic stripe's two
    *     tracks are the same.
    *
-   * @access private
-   *
-   * @param {Object} trackOneData
-   * @param {Object trackTwoData
+   * @param {!Object} trackOneData
+   * @param {!Object trackTwoData
    * @returns {boolean} Indicates whether the two tracks' shared data
-   *     are the same.
+   *     are the same
    */
   function checkCorrespondance_(trackOneData, trackTwoData) {
     if (
@@ -74,12 +75,10 @@ export const cardDetailsService = (function () {
    *     last name, expiry date, account number, country code, optional data)
    *     and returns it wrapped up within the object firstTrackData.
    *
-   * @access private
-   *
-   * @param {Object} firstTrack Contains the read first track string of
-   *     the magnetic stripe on the plastic money cards.
-   * @returns {Object} firstTrackData Contains the data extracted from
-   *     the first track of the magnetic stripe.
+   * @param {string} firstTrack Contains the read first track string of
+   *     the magnetic stripe on the plastic money cards
+   * @returns {!Object} firstTrackData Contains the data extracted from
+   *     the first track of the magnetic stripe
    */
   function extractFirstTrackData_(firstTrack) {
     firstTrack = firstTrack.replace("%B", "");
@@ -185,10 +184,10 @@ export const cardDetailsService = (function () {
    *     account number, country code, optional data) and returns it wrapped
    *     up within the object secondTrackData.
    *
-   * @access private
-   *
-   * @param {Object} secondTrack   Contains the read second track string of the magnetic stripe on the plastic money cards.
-   * @returns {Object} secondTrackData   Contains the data extracted from the second track of the magnetic stripe.
+   * @param {string} secondTrack Contains the read second track string of
+   *     the magnetic stripe on the plastic money cards.
+   * @returns {!Object} secondTrackData Contains the data extracted from
+   *     the second track of the magnetic stripe.
    */
   function extractSecondTrackData_(secondTrack) {
     secondTrack = secondTrack.replace(";", "");

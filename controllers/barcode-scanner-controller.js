@@ -3,23 +3,28 @@ import { productsList } from "../models/products-list.js";
 import { publishProductBarcodes } from "../communicators/communicator.js";
 import { observer } from "../communicators/observer.js";
 
+/**
+ * @fileoverview Connects both the view and the model of the barcode scanner
+ * exposes function to handle the device when view rendered and destroyed,
+ * it also uses the communicator to make interaction with the device
+ * and uses the observer pattern to listen to any data sent by the device.
+ *
+ * @public
+ */
 export const barcodeScannerController = (function () {
-  /** @private {number} */
+  /** @type {number} */
   let subscriberId_ = undefined;
 
   /**
    * Subscribes to the observer using the topic specified within.
    *
    * @see addProduct_, publishProductBarcodes, observer.subscribe
-   *
-   * @access public
    */
   const makeSubscription_ = function () {
     subscriberId_ = observer.subscribe(
       "BARCODE_NEW_PRODUCT_SCANNED",
       (productCode) => {
         addProduct_(productCode);
-        publishProductBarcodes;
       }
     );
   };
@@ -30,8 +35,6 @@ export const barcodeScannerController = (function () {
    * Unsubscribes from the observer.
    *
    * @see observer.unsubscribe
-   *
-   * @access public
    */
   const finalizeWork = function () {
     observer.unsubscribe("BARCODE_NEW_PRODUCT_SCANNED", subscriberId_);
@@ -40,8 +43,6 @@ export const barcodeScannerController = (function () {
   /**
    * Makes the effect of scanning new product's code be reflected on both
    *     the model and the view.
-   *
-   * @access private
    *
    * @see productsList.appendToList, barcodeScannerView.addProductCode
    *
@@ -57,8 +58,6 @@ export const barcodeScannerController = (function () {
    * Makes the effect of clearing the products' list be reflected
    *     on both the model and the view
    *
-   * @access public
-   *
    * @see productsList.clearList, barcodeScannerView.clearProductsList
    *
    * @param {string} productCode
@@ -72,16 +71,17 @@ export const barcodeScannerController = (function () {
    * Renders the barcode scanner page, highlights
    *     the peripheral selected, and makes subscription.
    *
-   * @access public
-   *
    * @see makeSubscription_
    */
   const renderBarcodeScannerView = function () {
     barcodeScannerView.renderBarcodeScanner();
+    makeSubscription_();
+    document
+      .getElementById("scan-button")
+      .addEventListener("click", publishProductBarcodes);
     document
       .getElementById("clear-button")
       .addEventListener("click", clearProductsList_);
-    makeSubscription_();
   };
 
   return {

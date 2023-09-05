@@ -3,6 +3,10 @@ import { cardReaderController } from "./controllers/card-reader-controller.js";
 import { indexView } from "./indexView.js";
 import { peripheralsTagControl } from "./ui-components/peripherals.js";
 
+/**
+ * @fileoverview Provides functionality to control how and when to render
+ * any of the devices' views.
+ */
 document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("barcode-scanner")

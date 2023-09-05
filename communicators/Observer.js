@@ -1,18 +1,21 @@
+/**
+ * @fileoverview Implements observer pattern implementation
+ *     (subscribe, unsubscribe, publish)
+ * @public
+ */
 export const observer = (function () {
-  /** @private {number} */
+  /** @type {number} */
   let id_ = 0;
-  /** @private {object} */
+  /** @type {object<string, Array<{id: string, functionInCharge: function(): undefined}>>} */
   let container_ = {};
 
   /**
    * Adds the topic/event to the container in order to notify
    *     the subscribers on publish.
    *
-   * @access public
-   *
    * @param {string} topic Which is the name of the topic/event to be
    *     notified for.
-   * @param {function(): undefined} callbackFunction Function that will be
+   * @param {!function(): undefined} callbackFunction Function that will be
    *     executed on publish for every subscriber on the specified topic
    * @returns {number} id Distinct id or every subscriber
    *     to permit unsubscription
@@ -31,8 +34,6 @@ export const observer = (function () {
 
   /**
    * Unsubscribes the subscriber from the topic it subscribed to.
-   *
-   * @access public
    *
    * @param {string} topic  The topic/event specified to unsubscribe from
    * @param {number} id_    Subscriber's id
@@ -55,10 +56,8 @@ export const observer = (function () {
    * It will invoke the subsciber's function specified for the
    *     specified topic type.
    *
-   * @access public
-   *
    * @param {string} topic  The event or topic wanted to notify its subscibers
-   * @param {Object} data   The wanted data to be passed to the
+   * @param {?Object} data   The wanted data to be passed to the
    *     subscibers of the topic
    */
   const publish = function (topic, data) {

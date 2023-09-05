@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Applies the revealing module pattern in order to organize
+ * the access and modification of the products list model.
+ */
 export const productsList = (function () {
   /** @private {string[]} */
   let productsScannedList_ = [];
@@ -5,7 +9,6 @@ export const productsList = (function () {
   /**
    * Clears the list model object holding the products scanned.
    *
-   * @access public
    * @memberof productsList
    */
   function clearList() {
@@ -16,8 +19,9 @@ export const productsList = (function () {
    * Appends the newly scanned product's barcode to the list model
    *     object holding the products scanned.
    *
-   * @access public
    * @memberof productsList
+   * 
+   * @param {string} newProductScanned 
    */
   function appendToList(newProductScanned) {
     productsScannedList_.push(newProductScanned);

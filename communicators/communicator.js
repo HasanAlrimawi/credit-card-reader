@@ -8,13 +8,13 @@ setTimeout(() => {
   console.log("I PUBLISHED");
 }, 1000);
 
-export const publishProductBarcodes = setTimeout(() => {
-  setInterval(() => {
-    let sample = (Math.random() + 1).toString(36).substring(7);
-    observer.publish("BARCODE_NEW_PRODUCT_SCANNED", sample);
-    console.log(sample);
-  }, 2000);
-}, 2000);
+/**
+ * Makes a new string randomly of fixed length (7 characters)
+ */
+export const publishProductBarcodes = () => {
+  const sample = (Math.random() + 1).toString(36).substring(7);
+  observer.publish("BARCODE_NEW_PRODUCT_SCANNED", sample);
+};
 
 /**
  * Simulates card reader device returned data, and returns data within a promise.

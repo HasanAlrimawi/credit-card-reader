@@ -1,3 +1,7 @@
+/**
+ * @fileoverview Provides a cutom html tag to contain the available devices
+ * and to highlight the chosen one out of the list exposed.
+ */
 class Peripherals extends HTMLElement {
   constructor() {
     super();
@@ -13,14 +17,20 @@ class Peripherals extends HTMLElement {
       </div>`;
   }
 }
+// To declare the custom-peripherals tag.
 customElements.define("custom-peripherals", Peripherals);
 
+/**
+ * Provides the ability to change the highlight on the selected device.
+ */
 export const peripheralsTagControl = (function () {
   /**
    * Highlights the selected peripheral page.
-   * @access public
+   *
    * @memberof peripheralsTagControl
    * @see removeHighlighting_
+   *
+   * @param {number} peripheralId represents the peripheral's id in HTML
    */
   const highlightPeripheralSelected = function (peripheralId) {
     removeHighlighting_();

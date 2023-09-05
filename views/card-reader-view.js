@@ -1,14 +1,16 @@
+/**
+ * @fileoverview Provides functionality to render/update the view of
+ * the card reader view.
+ */
 export const cardReaderView = (function () {
   /**
    * Fills the card information model data into the corresponding fields.
    *
    * It takes the model data, fills in the defined attributes of it,
    * and disables the fields of the undefined ones.
-   *
-   * @access public
    * @memberof CardReaderView
    *
-   * @param {CardInformation} cardDetails
+   * @param {!CardInformation} cardDetails
    */
   const autoFillForm = function (cardDetails) {
     document.getElementById("first-name").value = cardDetails.firstName;
@@ -37,8 +39,6 @@ export const cardReaderView = (function () {
 
   /**
    * Renders the card reader page, and rehighlights the peripheral selected.
-   *
-   * @access public
    */
   const renderCardReader = function () {
     document.getElementById("container")?.insertAdjacentHTML(

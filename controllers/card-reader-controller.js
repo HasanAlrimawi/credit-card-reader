@@ -4,6 +4,14 @@ import { cardDetailsService } from "../services/card-reader-extractor.js";
 import { observer } from "../communicators/observer.js";
 import { CardDetailsException } from "../exceptions/card-details-exception.js";
 
+/**
+ * @fileoverview Connects both the view and the model of the card reader,
+ * exposes function to handle the device when view rendered and destroyed,
+ * it also uses the communicator to make interaction with the device
+ * and uses the observer pattern to listen to any data sent by the device.
+ *
+ * @public
+ */
 export const cardReaderController = (function () {
   /** @private {number} */
   let subscriberId_ = undefined;
@@ -12,8 +20,6 @@ export const cardReaderController = (function () {
    * Subscribes to the observer using the topic specified within.
    *
    * @see updateCardReaderViewAndModel_, observer.subscibe
-   *
-   * @access public
    */
   const makeSubscription_ = function () {
     subscriberId_ = observer.subscribe(
@@ -30,8 +36,6 @@ export const cardReaderController = (function () {
    * Unsubscribes from the observer.
    *
    * @see observer.unsubscribe
-   *
-   * @access public
    */
   const finalizeWork = function () {
     observer.unsubscribe("MAGNETIC_CARD_READ", subscriberId_);
@@ -40,8 +44,6 @@ export const cardReaderController = (function () {
   /**
    * Updates the card details model with the newly extracted read data off
    *     the card after, and updates the view.
-   *
-   * @access private
    *
    * @see cardDetailsService.extractCardDetails
    *
@@ -66,8 +68,6 @@ export const cardReaderController = (function () {
   /**
    * Renders the card reader page, highlights the peripheral
    *     selected, and makes subscription.
-   *
-   * @access public
    *
    * @see makeSubscription_
    */

@@ -1,5 +1,5 @@
 /**
- * Exception that's thrown when the credit card's data extracted from tracks
+ * @fileoverview Exception that's thrown when the credit card's data extracted from tracks
  *     of the magnetic stripe is different.
  */
 export class CardDetailsException extends Error {
