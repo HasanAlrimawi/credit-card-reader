@@ -10,15 +10,15 @@ export const eSignatureView = (function () {
     document.getElementById("container")?.insertAdjacentHTML(
       "beforeend",
       `<div class="card-form">
-      <span class="subtitle">E-Signature type</span>
-      <div class="dropdown">
-        <span class="dropdown-title">Select type</span>
-        <div class="dropdown-content">
-          <p class="dropdown-elements" id="image-based">Image based</p>
-          <p class="dropdown-elements" id="coordinates-based">Coordinates based</p>
-        </div>
-      </div>
-    </div>`
+       <span class="subtitle">E-Signature type</span>
+       <div class="dropdown">
+         <span class="dropdown-title">Select type</span>
+         <div class="dropdown-content">
+           <p class="dropdown-elements" id="image-based">Image based</p>
+           <p class="dropdown-elements" id="coordinates-based">Coordinates based</p>
+         </div>
+       </div>
+     </div>`
     );
   };
 
@@ -32,10 +32,10 @@ export const eSignatureView = (function () {
         <span class="subtitle">Scanned signature</span>
         <span class="download">
         <span>Download signature:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <a href="/assets/MicrosoftTeams-image.png" download="e-signature.png">
-        Roadmap.png
-        </a>
-    </span>
+          <a href="/assets/signature.png" download="e-signature.png">
+            e-signature.png
+          </a>
+        </span>
       </div>`
     );
   };

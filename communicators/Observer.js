@@ -29,9 +29,6 @@ export const observer = (function () {
       id_: ++id_,
       functionInCharge: callbackFunction,
     });
-    for (let subscriber of container_[topic]){
-      console.log(`from Subscription: ${subscriber.id_}`);
-    }
     return id_;
   };
 
@@ -44,20 +41,14 @@ export const observer = (function () {
   const unsubscribe = function (topic, id_) {
     let subscribers = [];
 
-    for (let subscriber of container_[topic]){
-      console.log(`from before Unsubscription: ${subscriber.id_}`);
-    }
-
     if (topic in container_ && id_) {
       for (let subscriber of container_[topic]) {
         if (subscriber.id_ !== id_) {
           subscribers.push(subscriber);
         }
       }
+
       container_[topic] = subscribers;
-    }
-    for (let subscriber of container_[topic]){
-      console.log(`from after Unsubscription: ${subscriber.id_}`);
     }
   };
 
