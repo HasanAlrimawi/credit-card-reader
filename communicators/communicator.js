@@ -6,7 +6,7 @@ setTimeout(() => {
     "%B5934 5678 9101 1223564Alrimawi/Hasan Mohammed.works^1226hello?;5934 5678 9101 1223=5641226hello?"
   );
   console.log("I PUBLISHED");
-}, 1000);
+}, 2000);
 
 /**
  * Makes a new string randomly of fixed length (7 characters)

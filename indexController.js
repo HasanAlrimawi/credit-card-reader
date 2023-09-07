@@ -23,6 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("click", renderEsignature);
 });
 
+/**
+ * Renders the barcode scanner UI on the screen after clearing the preceding
+ *     device's UI, then updates the title of the device shown and highlights
+ *     its name in the list.
+ *
+ * @see indexView.clearPrecedingDevice, indexView.updateTitle
+ *     barcodeScannerController.renderBarcodeScannerView,
+ *     peripheralsTagControl.highlightPeripheralSelected
+ */
 function renderBarcodeScanner() {
   indexView.clearPrecedingDevice();
   barcodeScannerController.renderBarcodeScannerView();
@@ -41,6 +50,15 @@ function renderBarcodeScanner() {
     });
 }
 
+/**
+ * Renders the card reader UI on the screen after clearing the preceding
+ *     device's UI, then updates the title of the device shown and highlights
+ *     its name in the list.
+ *
+ * @see indexView.clearPrecedingDevice, indexView.updateTitle
+ *     cardReaderController.renderCardReaderView,
+ *     peripheralsTagControl.highlightPeripheralSelected
+ */
 function renderCardReader() {
   indexView.clearPrecedingDevice();
   cardReaderController.renderCardReaderView();
@@ -59,6 +77,15 @@ function renderCardReader() {
     });
 }
 
+/**
+ * Renders the e-signature's UI on the screen after clearing the preceding
+ *     device's UI, then updates the title of the device shown and highlights
+ *     its name in the list.
+ *
+ * @see indexView.clearPrecedingDevice, indexView.updateTitle
+ *     eSignatureController.renderEsignatureView,
+ *     peripheralsTagControl.highlightPeripheralSelected
+ */
 function renderEsignature() {
   indexView.clearPrecedingDevice();
   eSignatureController.renderEsignatureView();
