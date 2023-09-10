@@ -1,4 +1,4 @@
-import { elementInsertionPosition } from "./constants/element-insertion-positions.js";
+import { ELEMENT_INSERTION_POSITION } from "./constants/element-insertion-positions.js";
 import { barcodeScannerController } from "./controllers/barcode-scanner-controller.js";
 import { cardReaderController } from "./controllers/card-reader-controller.js";
 import { eSignatureController } from "./controllers/e-signature-controller.js";
@@ -42,7 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
  */
 function showDevice(deviceController) {
   indexView.clearPrecedingDevice();
-  deviceController.renderView("container", elementInsertionPosition.BEFORE_END);
+  deviceController.renderView(
+    "container",
+    ELEMENT_INSERTION_POSITION.BEFORE_END
+  );
   indexView.updateTitle(deviceController.myTitle);
   peripheralsTagControl.highlightPeripheralSelected(deviceController.myId);
 }

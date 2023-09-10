@@ -3,8 +3,8 @@ import { cardReaderView } from "../views/card-reader-view.js";
 import { cardDetailsService } from "../services/card-reader-extractor.js";
 import { observer } from "../communicators/observer.js";
 import { CardDetailsException } from "../exceptions/card-details-exception.js";
-import { observerTopics } from "../constants/observer-topics.js";
-import { devicesTitleId } from "../constants/device-title-id.js";
+import { OBSERVER_TOPICS } from "../constants/observer-topics.js";
+import { DEVICES_TITLE_ID } from "../constants/device-title-id.js";
 
 /**
  * @fileoverview Connects both the view and the model of the card reader,
@@ -17,9 +17,9 @@ import { devicesTitleId } from "../constants/device-title-id.js";
 export const cardReaderController = (function () {
   /** @private {number} */
   let subscriberId_ = undefined;
-  const myTitle = devicesTitleId.cardReader.title;
-  const myId = devicesTitleId.cardReader.peripheralId;
-  
+  const myTitle = DEVICES_TITLE_ID.CARD_READER.TITLE;
+  const myId = DEVICES_TITLE_ID.CARD_READER.PERIPHERAL_ID;
+
   /**
    * Makes important changes to the card reader UI before destruction.
    *
@@ -28,7 +28,7 @@ export const cardReaderController = (function () {
    * @see observer.unsubscribe
    */
   const finalizeWork = function () {
-    observer.unsubscribe(observerTopics.CARD_READER_TOPIC, subscriberId_);
+    observer.unsubscribe(OBSERVER_TOPICS.CARD_READER_TOPIC, subscriberId_);
   };
 
   /**
@@ -72,7 +72,7 @@ export const cardReaderController = (function () {
       .insertAdjacentHTML(insertionPosition, cardReaderView.cardReaderHtml);
 
     subscriberId_ = observer.subscribe(
-      observerTopics.CARD_READER_TOPIC,
+      OBSERVER_TOPICS.CARD_READER_TOPIC,
       (magneticStripeRead) => {
         updateCardReaderViewAndModel_(magneticStripeRead);
       }

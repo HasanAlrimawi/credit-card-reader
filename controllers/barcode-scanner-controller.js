@@ -2,8 +2,8 @@ import { barcodeScannerView } from "../views/barcode-scanner-view.js";
 import { productsList } from "../models/products-list.js";
 import { publishProductBarcodes } from "../communicators/communicator.js";
 import { observer } from "../communicators/observer.js";
-import { observerTopics } from "../constants/observer-topics.js";
-import { devicesTitleId } from "../constants/device-title-id.js";
+import { OBSERVER_TOPICS } from "../constants/observer-topics.js";
+import { DEVICES_TITLE_ID } from "../constants/device-title-id.js";
 
 /**
  * @fileoverview Connects both the view and the model of the barcode scanner
@@ -16,8 +16,8 @@ import { devicesTitleId } from "../constants/device-title-id.js";
 export const barcodeScannerController = (function () {
   /** @type {number} */
   let subscriberId_ = undefined;
-  const myTitle = devicesTitleId.barcodeScanner.title;
-  const myId = devicesTitleId.barcodeScanner.peripheralId;
+  const myTitle = DEVICES_TITLE_ID.BARCODE_SCANNER.TITLE;
+  const myId = DEVICES_TITLE_ID.BARCODE_SCANNER.PERIPHERAL_ID;
 
   /**
    * Makes important changes to the barcode UI before destruction.
@@ -27,7 +27,7 @@ export const barcodeScannerController = (function () {
    * @see observer.unsubscribe
    */
   const finalizeWork = function () {
-    observer.unsubscribe(observerTopics.BARCODE_TOPIC, subscriberId_);
+    observer.unsubscribe(OBSERVER_TOPICS.BARCODE_TOPIC, subscriberId_);
   };
 
   /**
@@ -75,7 +75,7 @@ export const barcodeScannerController = (function () {
       );
 
     subscriberId_ = observer.subscribe(
-      observerTopics.BARCODE_TOPIC,
+      OBSERVER_TOPICS.BARCODE_TOPIC,
       (productCode) => {
         addProduct_(productCode);
       }

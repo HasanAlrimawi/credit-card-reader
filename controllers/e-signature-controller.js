@@ -1,7 +1,7 @@
 import { generateCoordinates } from "../communicators/communicator.js";
 import { observer } from "../communicators/observer.js";
-import { devicesTitleId } from "../constants/device-title-id.js";
-import { observerTopics } from "../constants/observer-topics.js";
+import { DEVICES_TITLE_ID } from "../constants/device-title-id.js";
+import { OBSERVER_TOPICS } from "../constants/observer-topics.js";
 import { eSignatureView } from "../views/e-signature-view.js";
 
 /**
@@ -14,8 +14,8 @@ import { eSignatureView } from "../views/e-signature-view.js";
 export const eSignatureController = (function () {
   /** @private {number} */
   let subscriberId_ = undefined;
-  const myTitle = devicesTitleId.eSignature.title;
-  const myId = devicesTitleId.eSignature.peripheralId;
+  const myTitle = DEVICES_TITLE_ID.ESIGNATURE.TITLE;
+  const myId = DEVICES_TITLE_ID.ESIGNATURE.PERIPHERAL_ID;
   /**
    * Makes important changes to the e-signature UI before destruction.
    *
@@ -24,9 +24,9 @@ export const eSignatureController = (function () {
    * @see observer.unsubscribe
    */
   const finalizeWork = function () {
-    observer.unsubscribe(observerTopics.ESIGNATURE_IMAGE_TOPIC, subscriberId_);
+    observer.unsubscribe(OBSERVER_TOPICS.ESIGNATURE_IMAGE_TOPIC, subscriberId_);
     observer.unsubscribe(
-      observerTopics.ESIGNATURE_COORDINATES_TOPIC,
+      OBSERVER_TOPICS.ESIGNATURE_COORDINATES_TOPIC,
       subscriberId_
     );
   };
@@ -78,12 +78,12 @@ export const eSignatureController = (function () {
   const renderImageBased_ = function () {
     clearSelection_();
     observer.unsubscribe(
-      observerTopics.ESIGNATURE_COORDINATES_TOPIC,
+      OBSERVER_TOPICS.ESIGNATURE_COORDINATES_TOPIC,
       subscriberId_
     );
     eSignatureView.renderEsignatureImageType();
     subscriberId_ = observer.subscribe(
-      observerTopics.ESIGNATURE_IMAGE_TOPIC,
+      OBSERVER_TOPICS.ESIGNATURE_IMAGE_TOPIC,
       (imageReceived) => {
         updateEsignatureView_("imageBased", imageReceived);
       }
@@ -100,13 +100,13 @@ export const eSignatureController = (function () {
    */
   const renderCoordinatesBased_ = function () {
     clearSelection_();
-    observer.unsubscribe(observerTopics.ESIGNATURE_IMAGE_TOPIC, subscriberId_);
+    observer.unsubscribe(OBSERVER_TOPICS.ESIGNATURE_IMAGE_TOPIC, subscriberId_);
     eSignatureView.renderEsignatureCoordinatesType();
 
     document.getElementById("copy-button").addEventListener("click", copy_);
 
     subscriberId_ = observer.subscribe(
-      observerTopics.ESIGNATURE_COORDINATES_TOPIC,
+      OBSERVER_TOPICS.ESIGNATURE_COORDINATES_TOPIC,
       (coordinatesReceived) => {
         updateEsignatureView_("coordinatesBased", coordinatesReceived);
       }
