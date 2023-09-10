@@ -1,3 +1,5 @@
+import { devicesTitleId } from "../constants/device-title-id.js";
+
 /**
  * @fileoverview Provides a cutom html tag to contain the available devices
  * and to highlight the chosen one out of the list exposed.
@@ -11,9 +13,9 @@ class Peripherals extends HTMLElement {
         <div class="subtitle">
           Peripherals
         </div>
-        <span class="label" id="card-reader">Card Reader</span>
-        <span class="label" id="e-signature">E-Signature</span>
-        <span class="label" id="barcode-scanner">Barcode Scanner</span>
+        <span class="label" id=${devicesTitleId.cardReader.peripheralId}>${devicesTitleId.cardReader.title}</span>
+        <span class="label" id=${devicesTitleId.eSignature.peripheralId}>${devicesTitleId.eSignature.title}</span>
+        <span class="label" id=${devicesTitleId.barcodeScanner.peripheralId}>${devicesTitleId.barcodeScanner.title}</span>
       </div>`;
   }
 }

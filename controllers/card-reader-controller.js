@@ -3,6 +3,8 @@ import { cardReaderView } from "../views/card-reader-view.js";
 import { cardDetailsService } from "../services/card-reader-extractor.js";
 import { observer } from "../communicators/observer.js";
 import { CardDetailsException } from "../exceptions/card-details-exception.js";
+import { observerTopics } from "../constants/observer-topics.js";
+import { devicesTitleId } from "../constants/device-title-id.js";
 
 /**
  * @fileoverview Connects both the view and the model of the card reader,
@@ -15,21 +17,9 @@ import { CardDetailsException } from "../exceptions/card-details-exception.js";
 export const cardReaderController = (function () {
   /** @private {number} */
   let subscriberId_ = undefined;
-
-  /**
-   * Subscribes to the observer using the topic specified within.
-   *
-   * @see updateCardReaderViewAndModel_, observer.subscibe
-   */
-  const makeSubscription_ = function () {
-    subscriberId_ = observer.subscribe(
-      "MAGNETIC_CARD_READ",
-      (magneticStripeRead) => {
-        updateCardReaderViewAndModel_(magneticStripeRead);
-      }
-    );
-  };
-
+  const myTitle = devicesTitleId.cardReader.title;
+  const myId = devicesTitleId.cardReader.peripheralId;
+  
   /**
    * Makes important changes to the card reader UI before destruction.
    *
@@ -38,7 +28,7 @@ export const cardReaderController = (function () {
    * @see observer.unsubscribe
    */
   const finalizeWork = function () {
-    observer.unsubscribe("MAGNETIC_CARD_READ", subscriberId_);
+    observer.unsubscribe(observerTopics.CARD_READER_TOPIC, subscriberId_);
   };
 
   /**
@@ -70,14 +60,29 @@ export const cardReaderController = (function () {
    *     selected, and makes subscription.
    *
    * @see makeSubscription_
+   *
+   * @param {string} referenceElementId Represents the element id who will be
+   *     used as a reference to add the HTML code
+   * @param {string} insertionPosition Defines the location where the HTML code
+   *     will be added to the reference element's perspective
    */
-  const renderCardReaderView = function () {
-    cardReaderView.renderCardReader();
-    makeSubscription_();
+  const renderView = function (referenceElementId, insertionPosition) {
+    document
+      .getElementById(referenceElementId)
+      .insertAdjacentHTML(insertionPosition, cardReaderView.cardReaderHtml);
+
+    subscriberId_ = observer.subscribe(
+      observerTopics.CARD_READER_TOPIC,
+      (magneticStripeRead) => {
+        updateCardReaderViewAndModel_(magneticStripeRead);
+      }
+    );
   };
 
   return {
     finalizeWork,
-    renderCardReaderView,
+    renderView,
+    myTitle,
+    myId,
   };
 })();

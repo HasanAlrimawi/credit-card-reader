@@ -1,3 +1,4 @@
+import { elementInsertionPosition } from "./constants/element-insertion-positions.js";
 import { barcodeScannerController } from "./controllers/barcode-scanner-controller.js";
 import { cardReaderController } from "./controllers/card-reader-controller.js";
 import { eSignatureController } from "./controllers/e-signature-controller.js";
@@ -10,96 +11,38 @@ import { peripheralsTagControl } from "./ui-components/peripherals.js";
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  document
-    .getElementById("barcode-scanner")
-    .addEventListener("click", renderBarcodeScanner);
+  document.getElementById("barcode-scanner").addEventListener("click", () => {
+    showDevice(barcodeScannerController);
+    eSignatureController.finalizeWork();
+    cardReaderController.finalizeWork();
+  });
 
-  document
-    .getElementById("card-reader")
-    .addEventListener("click", renderCardReader);
+  document.getElementById("card-reader").addEventListener("click", () => {
+    showDevice(cardReaderController);
+    eSignatureController.finalizeWork();
+    barcodeScannerController.finalizeWork();
+  });
 
-  document
-    .getElementById("e-signature")
-    .addEventListener("click", renderEsignature);
+  document.getElementById("e-signature").addEventListener("click", () => {
+    showDevice(eSignatureController);
+    cardReaderController.finalizeWork();
+    barcodeScannerController.finalizeWork();
+  });
 });
 
 /**
- * Renders the barcode scanner UI on the screen after clearing the preceding
+ * Renders the selected device's UI on the screen after clearing the preceding
  *     device's UI, then updates the title of the device shown and highlights
  *     its name in the list.
  *
- * @see indexView.clearPrecedingDevice, indexView.updateTitle
- *     barcodeScannerController.renderBarcodeScannerView,
+ * @see indexView.clearPrecedingDevice, indexView.updateTitle,
  *     peripheralsTagControl.highlightPeripheralSelected
- */
-function renderBarcodeScanner() {
-  indexView.clearPrecedingDevice();
-  barcodeScannerController.renderBarcodeScannerView();
-  indexView.updateTitle("Barcode Scanner");
-  peripheralsTagControl.highlightPeripheralSelected("barcode-scanner");
-
-  document
-    .getElementById("card-reader")
-    .addEventListener("click", barcodeScannerController.finalizeWork, {
-      once: true,
-    });
-  document
-    .getElementById("e-signature")
-    .addEventListener("click", cardReaderController.finalizeWork, {
-      once: true,
-    });
-}
-
-/**
- * Renders the card reader UI on the screen after clearing the preceding
- *     device's UI, then updates the title of the device shown and highlights
- *     its name in the list.
  *
- * @see indexView.clearPrecedingDevice, indexView.updateTitle
- *     cardReaderController.renderCardReaderView,
- *     peripheralsTagControl.highlightPeripheralSelected
+ * @param {object} deviceController Represents the selected device's controller.
  */
-function renderCardReader() {
+function showDevice(deviceController) {
   indexView.clearPrecedingDevice();
-  cardReaderController.renderCardReaderView();
-  indexView.updateTitle("Card Reader");
-  peripheralsTagControl.highlightPeripheralSelected("card-reader");
-
-  document
-    .getElementById("barcode-scanner")
-    .addEventListener("click", cardReaderController.finalizeWork, {
-      once: true,
-    });
-  document
-    .getElementById("e-signature")
-    .addEventListener("click", cardReaderController.finalizeWork, {
-      once: true,
-    });
-}
-
-/**
- * Renders the e-signature's UI on the screen after clearing the preceding
- *     device's UI, then updates the title of the device shown and highlights
- *     its name in the list.
- *
- * @see indexView.clearPrecedingDevice, indexView.updateTitle
- *     eSignatureController.renderEsignatureView,
- *     peripheralsTagControl.highlightPeripheralSelected
- */
-function renderEsignature() {
-  indexView.clearPrecedingDevice();
-  eSignatureController.renderEsignatureView();
-  indexView.updateTitle("E-Signature");
-  peripheralsTagControl.highlightPeripheralSelected("e-signature");
-
-  document
-    .getElementById("barcode-scanner")
-    .addEventListener("click", eSignatureController.finalizeWork, {
-      once: true,
-    });
-  document
-    .getElementById("card-reader")
-    .addEventListener("click", cardReaderController.finalizeWork, {
-      once: true,
-    });
+  deviceController.renderView("container", elementInsertionPosition.BEFORE_END);
+  indexView.updateTitle(deviceController.myTitle);
+  peripheralsTagControl.highlightPeripheralSelected(deviceController.myId);
 }

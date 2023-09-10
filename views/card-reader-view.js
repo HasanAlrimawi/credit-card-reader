@@ -38,53 +38,50 @@ export const cardReaderView = (function () {
   };
 
   /**
-   * Renders the card reader page, and rehighlights the peripheral selected.
+   * Represents the card reader's HTML code.
+   * 
+   * @const {string}
    */
-  const renderCardReader = function () {
-    document.getElementById("container")?.insertAdjacentHTML(
-      "beforeend",
-      `<div class="card-form">
-      <div class="form-row">
-        <div class="form-group">
-          <span class="label">First Name</span>
-          <input type="text" name="cardHolderName" id="first-name" />
-        </div>
-        <div class="form-group">
-          <span class="label">Middle Name</span>
-          <input type="text" name="cardHolderName" id="middle-name" />
-        </div>
-        <div class="form-group">
-          <span class="label">Last Name</span>
-          <input type="text" name="cardHolderName" id="last-name" />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <span class="label">Account Number</span>
-          <input type="text" name="cardDetails" id="account-number" />
-        </div>
-        <div class="form-group">
-          <span class="label">Expiration Date</span>
-          <input type="text" name="cardDetails" id="expiration-date" />
-        </div>
-      </div>
+  const cardReaderHtml = `<div class="card-form">
+  <div class="form-row">
+    <div class="form-group">
+      <span class="label">First Name</span>
+      <input type="text" name="cardHolderName" id="first-name" />
+    </div>
+    <div class="form-group">
+      <span class="label">Middle Name</span>
+      <input type="text" name="cardHolderName" id="middle-name" />
+    </div>
+    <div class="form-group">
+      <span class="label">Last Name</span>
+      <input type="text" name="cardHolderName" id="last-name" />
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <span class="label">Account Number</span>
+      <input type="text" name="cardDetails" id="account-number" />
+    </div>
+    <div class="form-group">
+      <span class="label">Expiration Date</span>
+      <input type="text" name="cardDetails" id="expiration-date" />
+    </div>
+  </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <span class="label">CCN/CVV</span>
-          <input type="text" name="cardDetails" id="CCN" />
-        </div>
-        <div class="form-group">
-          <span class="label">Country Code</span>
-          <input type="text" name="cardDetails" id="country-code" />
-        </div>
-      </div>
-    </div>`
-    );
-  };
+  <div class="form-row">
+    <div class="form-group">
+      <span class="label">CCN/CVV</span>
+      <input type="text" name="cardDetails" id="CCN" />
+    </div>
+    <div class="form-group">
+      <span class="label">Country Code</span>
+      <input type="text" name="cardDetails" id="country-code" />
+    </div>
+  </div>
+</div>`;
 
   return {
-    renderCardReader,
     autoFillForm,
+    cardReaderHtml,
   };
 })();

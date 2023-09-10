@@ -28,28 +28,25 @@ export const barcodeScannerView = (function () {
   };
 
   /**
-   * Renders the barcode scanner page, and rehighlights
-   *     the peripheral selected.
+   * Represents the barcode scanner's HTML code.
+   * 
+   * @const {string}
    */
-  const renderBarcodeScanner = function () {
-    document.getElementById("container")?.insertAdjacentHTML(
-      "beforeend",
-      `<div class="card-form">
-          <span class="subtitle">Scanned products</span>
-          <ul id="list-of-scanned-products"></ul>
-        </div>
-        <div class="card-form">
-            <span class="subtitle">Control</span>
-            <div class="form-row">
-                <input type="button" id="scan-button" class="button" value="Scan" />
-                <input type="button" id="clear-button" class="button" value="Clear" />
-            </div>
-        </div>`
-    );
-  };
+  const barcodeScannerHtml = `
+  <div class="card-form">
+    <span class="subtitle">Scanned products</span>
+    <ul id="list-of-scanned-products"></ul>
+  </div>
+  <div class="card-form">
+    <span class="subtitle">Control</span>
+    <div class="form-row">
+        <input type="button" id="scan-button" class="button" value="Scan" />
+        <input type="button" id="clear-button" class="button" value="Clear" />
+    </div>
+  </div>`;
 
   return {
-    renderBarcodeScanner,
+    barcodeScannerHtml,
     clearProductsList,
     addProductCode,
   };

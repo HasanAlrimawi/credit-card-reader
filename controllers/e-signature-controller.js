@@ -1,5 +1,7 @@
 import { generateCoordinates } from "../communicators/communicator.js";
 import { observer } from "../communicators/observer.js";
+import { devicesTitleId } from "../constants/device-title-id.js";
+import { observerTopics } from "../constants/observer-topics.js";
 import { eSignatureView } from "../views/e-signature-view.js";
 
 /**
@@ -12,30 +14,8 @@ import { eSignatureView } from "../views/e-signature-view.js";
 export const eSignatureController = (function () {
   /** @private {number} */
   let subscriberId_ = undefined;
-
-  /**
-   * Subscribes to the observer using the topic specified within.
-   *
-   * @see updateEsignatureView_, observer.subscibe
-   */
-  const makeSubscription_ = function (type) {
-    if (type === "imageBased") {
-      subscriberId_ = observer.subscribe(
-        "IMAGE_ESIGNATURE_RECEIVED",
-        (imageReceived) => {
-          updateEsignatureView_("imageBased", imageReceived);
-        }
-      );
-    } else if (type === "coordinatesBased") {
-      subscriberId_ = observer.subscribe(
-        "COORDINATES_ESIGNATURE_RECEIVED",
-        (coordinatesReceived) => {
-          updateEsignatureView_("coordinatesBased", coordinatesReceived);
-        }
-      );
-    }
-  };
-
+  const myTitle = devicesTitleId.eSignature.title;
+  const myId = devicesTitleId.eSignature.peripheralId;
   /**
    * Makes important changes to the e-signature UI before destruction.
    *
@@ -44,8 +24,11 @@ export const eSignatureController = (function () {
    * @see observer.unsubscribe
    */
   const finalizeWork = function () {
-    observer.unsubscribe("MAGNETIC_CARD_READ", subscriberId_);
-    observer.unsubscribe("COORDINATES_ESIGNATURE_RECEIVED", subscriberId_);
+    observer.unsubscribe(observerTopics.ESIGNATURE_IMAGE_TOPIC, subscriberId_);
+    observer.unsubscribe(
+      observerTopics.ESIGNATURE_COORDINATES_TOPIC,
+      subscriberId_
+    );
   };
 
   /**
@@ -64,12 +47,18 @@ export const eSignatureController = (function () {
 
   /**
    * Renders the e-signature page, highlights the peripheral
-   *     selected.
+   *     selected, and omits event listeners where needed.
    *
-   * @see makeSubscription_, renderImageBased_, renderCoordinatesBased_
+   * @see renderImageBased_, renderCoordinatesBased_
+   * @param {string} referenceElementId Represents the element id who will be
+   *     used as a reference to add the HTML code
+   * @param {string} insertionPosition Defines the location where the HTML code
+   *     will be added to the reference element's perspective
    */
-  const renderEsignatureView = function () {
-    eSignatureView.renderEsignature();
+  const renderView = function (referenceElementId, insertionPosition) {
+    document
+      .getElementById(referenceElementId)
+      .insertAdjacentHTML(insertionPosition, eSignatureView.esignatureHtml);
     document
       .getElementById("image-based")
       .addEventListener("click", renderImageBased_);
@@ -83,14 +72,22 @@ export const eSignatureController = (function () {
    *     space of the viewport, and subscribing/unsubscribing from
    *     not needed topics.
    *
-   * @see clearSelection_, makeSubscription_, 
+   * @see clearSelection_, observer.subscribe,
    *     eSignatureView.renderEsignatureImageType, observer.unsubscribe
    */
   const renderImageBased_ = function () {
     clearSelection_();
-    observer.unsubscribe("COORDINATES_ESIGNATURE_RECEIVED", subscriberId_);
+    observer.unsubscribe(
+      observerTopics.ESIGNATURE_COORDINATES_TOPIC,
+      subscriberId_
+    );
     eSignatureView.renderEsignatureImageType();
-    makeSubscription_("imageBased");
+    subscriberId_ = observer.subscribe(
+      observerTopics.ESIGNATURE_IMAGE_TOPIC,
+      (imageReceived) => {
+        updateEsignatureView_("imageBased", imageReceived);
+      }
+    );
   };
 
   /**
@@ -98,17 +95,22 @@ export const eSignatureController = (function () {
    *     space of the viewport, and subscribing/unsubscribing from
    *     not needed topics.
    *
-   * @see clearSelection_, observer.unsubscribe, generateCoordinates
-   *     eSignatureView.renderEsignatureCoordinatesType, makeSubscription_
+   * @see clearSelection_, observer.unsubscribe, generateCoordinates,
+   *     eSignatureView.renderEsignatureCoordinatesType, observer.subscribe
    */
   const renderCoordinatesBased_ = function () {
     clearSelection_();
-    observer.unsubscribe("IMAGE_ESIGNATURE_RECEIVED", subscriberId_);
+    observer.unsubscribe(observerTopics.ESIGNATURE_IMAGE_TOPIC, subscriberId_);
     eSignatureView.renderEsignatureCoordinatesType();
 
     document.getElementById("copy-button").addEventListener("click", copy_);
 
-    makeSubscription_("coordinatesBased");
+    subscriberId_ = observer.subscribe(
+      observerTopics.ESIGNATURE_COORDINATES_TOPIC,
+      (coordinatesReceived) => {
+        updateEsignatureView_("coordinatesBased", coordinatesReceived);
+      }
+    );
     generateCoordinates();
   };
 
@@ -136,6 +138,8 @@ export const eSignatureController = (function () {
 
   return {
     finalizeWork,
-    renderEsignatureView,
+    renderView,
+    myTitle,
+    myId,
   };
 })();

@@ -2,6 +2,8 @@ import { barcodeScannerView } from "../views/barcode-scanner-view.js";
 import { productsList } from "../models/products-list.js";
 import { publishProductBarcodes } from "../communicators/communicator.js";
 import { observer } from "../communicators/observer.js";
+import { observerTopics } from "../constants/observer-topics.js";
+import { devicesTitleId } from "../constants/device-title-id.js";
 
 /**
  * @fileoverview Connects both the view and the model of the barcode scanner
@@ -14,20 +16,8 @@ import { observer } from "../communicators/observer.js";
 export const barcodeScannerController = (function () {
   /** @type {number} */
   let subscriberId_ = undefined;
-
-  /**
-   * Subscribes to the observer using the topic specified within.
-   *
-   * @see addProduct_, publishProductBarcodes, observer.subscribe
-   */
-  const makeSubscription_ = function () {
-    subscriberId_ = observer.subscribe(
-      "BARCODE_NEW_PRODUCT_SCANNED",
-      (productCode) => {
-        addProduct_(productCode);
-      }
-    );
-  };
+  const myTitle = devicesTitleId.barcodeScanner.title;
+  const myId = devicesTitleId.barcodeScanner.peripheralId;
 
   /**
    * Makes important changes to the barcode UI before destruction.
@@ -37,7 +27,7 @@ export const barcodeScannerController = (function () {
    * @see observer.unsubscribe
    */
   const finalizeWork = function () {
-    observer.unsubscribe("BARCODE_NEW_PRODUCT_SCANNED", subscriberId_);
+    observer.unsubscribe(observerTopics.BARCODE_TOPIC, subscriberId_);
   };
 
   /**
@@ -71,11 +61,26 @@ export const barcodeScannerController = (function () {
    * Renders the barcode scanner page, highlights
    *     the peripheral selected, and makes subscription.
    *
-   * @see makeSubscription_
+   * @param {string} referenceElementId Represents the element id who will be
+   *     used as a reference to add the HTML code
+   * @param {string} insertionPosition Defines the location where the HTML code
+   *     will be added to the reference element's perspective
    */
-  const renderBarcodeScannerView = function () {
-    barcodeScannerView.renderBarcodeScanner();
-    makeSubscription_();
+  const renderView = function (referenceElementId, insertionPosition) {
+    document
+      .getElementById(referenceElementId)
+      .insertAdjacentHTML(
+        insertionPosition,
+        barcodeScannerView.barcodeScannerHtml
+      );
+
+    subscriberId_ = observer.subscribe(
+      observerTopics.BARCODE_TOPIC,
+      (productCode) => {
+        addProduct_(productCode);
+      }
+    );
+
     document
       .getElementById("scan-button")
       .addEventListener("click", publishProductBarcodes);
@@ -86,6 +91,8 @@ export const barcodeScannerController = (function () {
 
   return {
     finalizeWork,
-    renderBarcodeScannerView,
+    renderView,
+    myId,
+    myTitle,
   };
 })();

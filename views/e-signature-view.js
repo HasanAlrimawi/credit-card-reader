@@ -4,23 +4,21 @@
  */
 export const eSignatureView = (function () {
   /**
-   * Renders the e-signature page, and rehighlights the peripheral selected.
+   * Represents the e-signature's HTML code.
+   * 
+   * @const {string}
    */
-  const renderEsignature = function () {
-    document.getElementById("container")?.insertAdjacentHTML(
-      "beforeend",
-      `<div class="card-form">
-       <span class="subtitle">E-Signature type</span>
-       <div class="dropdown">
-         <span class="dropdown-title">Select type</span>
-         <div class="dropdown-content">
-           <p class="dropdown-elements" id="image-based">Image based</p>
-           <p class="dropdown-elements" id="coordinates-based">Coordinates based</p>
-         </div>
-       </div>
-     </div>`
-    );
-  };
+  const esignatureHtml = `
+  <div class="card-form">
+    <span class="subtitle">E-Signature type</span>
+    <div class="dropdown">
+      <span class="dropdown-title">Select type</span>
+      <div class="dropdown-content">
+        <p class="dropdown-elements" id="image-based">Image based</p>
+        <p class="dropdown-elements" id="coordinates-based">Coordinates based</p>
+      </div>
+    </div>
+  </div>`;
 
   /**
    * Renders the specified e-signature device type.
@@ -55,7 +53,7 @@ export const eSignatureView = (function () {
   };
 
   return {
-    renderEsignature,
+    esignatureHtml,
     renderEsignatureImageType,
     renderEsignatureCoordinatesType,
   };
