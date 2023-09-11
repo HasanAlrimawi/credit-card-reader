@@ -11,6 +11,10 @@ import { peripheralsTagControl } from "./ui-components/peripherals.js";
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  document
+    .getElementById("toggle-theme-button")
+    .addEventListener("click", toggler.changeTheme);
+
   document.getElementById("barcode-scanner").addEventListener("click", () => {
     showDevice(barcodeScannerController);
     eSignatureController.finalizeWork();
@@ -49,3 +53,27 @@ function showDevice(deviceController) {
   indexView.updateTitle(deviceController.myTitle);
   peripheralsTagControl.highlightPeripheralSelected(deviceController.myId);
 }
+
+/**
+ * Wraps the state of the toggle to represent if the dark theme is selected
+ *     or not, in order to allow the operation of toggling.
+ */
+const toggler = (function () {
+  /** @private {boolean} */
+  let toggleState_ = false;
+
+  /**
+   * toggles the theme selected, by changing a document attribute.
+   */
+  const changeTheme = function () {
+    toggleState_ = !toggleState_;
+    if (toggleState_) {
+      document.documentElement.setAttribute("page-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("page-theme", "light");
+    }
+  };
+  return {
+    changeTheme,
+  };
+})();

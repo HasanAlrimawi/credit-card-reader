@@ -17,7 +17,11 @@ import { DEVICES_TITLE_ID } from "../constants/device-title-id.js";
 export const cardReaderController = (function () {
   /** @private {number} */
   let subscriberId_ = undefined;
+  /** @type {string} represents the title that represents the device */
   const myTitle = DEVICES_TITLE_ID.CARD_READER.TITLE;
+  /** @type {string} represents the id that represents the device's title
+   *     the peripherals tag component
+   */
   const myId = DEVICES_TITLE_ID.CARD_READER.PERIPHERAL_ID;
 
   /**

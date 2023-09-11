@@ -14,8 +14,13 @@ import { eSignatureView } from "../views/e-signature-view.js";
 export const eSignatureController = (function () {
   /** @private {number} */
   let subscriberId_ = undefined;
+  /** @type {string} represents the title that represents the device */
   const myTitle = DEVICES_TITLE_ID.ESIGNATURE.TITLE;
+  /** @type {string} represents the id that represents the device's title
+   *     the peripherals tag component
+   */
   const myId = DEVICES_TITLE_ID.ESIGNATURE.PERIPHERAL_ID;
+  
   /**
    * Makes important changes to the e-signature UI before destruction.
    *
