@@ -20,7 +20,7 @@ export const eSignatureController = (function () {
    *     the peripherals tag component
    */
   const myId = DEVICES_TITLE_ID.ESIGNATURE.PERIPHERAL_ID;
-  
+
   /**
    * Makes important changes to the e-signature UI before destruction.
    *
@@ -64,12 +64,15 @@ export const eSignatureController = (function () {
     document
       .getElementById(referenceElementId)
       .insertAdjacentHTML(insertionPosition, eSignatureView.esignatureHtml);
-    document
-      .getElementById("image-based")
-      .addEventListener("click", renderImageBased_);
+
+    document.getElementById("image-based").addEventListener("click", () => {
+      renderImageBased_(referenceElementId, insertionPosition);
+    });
     document
       .getElementById("coordinates-based")
-      .addEventListener("click", renderCoordinatesBased_);
+      .addEventListener("click", () => {
+        renderCoordinatesBased_(referenceElementId, insertionPosition);
+      });
   };
 
   /**
@@ -80,13 +83,18 @@ export const eSignatureController = (function () {
    * @see clearSelection_, observer.subscribe,
    *     eSignatureView.renderEsignatureImageType, observer.unsubscribe
    */
-  const renderImageBased_ = function () {
+  const renderImageBased_ = function (referenceElementId, insertionPosition) {
     clearSelection_();
     observer.unsubscribe(
       OBSERVER_TOPICS.ESIGNATURE_COORDINATES_TOPIC,
       subscriberId_
     );
-    eSignatureView.renderEsignatureImageType();
+    document
+      .getElementById(referenceElementId)
+      .insertAdjacentHTML(
+        insertionPosition,
+        eSignatureView.esignatureImageTypeHtml
+      );
     subscriberId_ = observer.subscribe(
       OBSERVER_TOPICS.ESIGNATURE_IMAGE_TOPIC,
       (imageReceived) => {
@@ -103,13 +111,19 @@ export const eSignatureController = (function () {
    * @see clearSelection_, observer.unsubscribe, generateCoordinates,
    *     eSignatureView.renderEsignatureCoordinatesType, observer.subscribe
    */
-  const renderCoordinatesBased_ = function () {
+  const renderCoordinatesBased_ = function (
+    referenceElementId,
+    insertionPosition
+  ) {
     clearSelection_();
     observer.unsubscribe(OBSERVER_TOPICS.ESIGNATURE_IMAGE_TOPIC, subscriberId_);
-    eSignatureView.renderEsignatureCoordinatesType();
-
+    document
+      .getElementById(referenceElementId)
+      .insertAdjacentHTML(
+        insertionPosition,
+        eSignatureView.esignatureCoordinatesTypeHtml
+      );
     document.getElementById("copy-button").addEventListener("click", copy_);
-
     subscriberId_ = observer.subscribe(
       OBSERVER_TOPICS.ESIGNATURE_COORDINATES_TOPIC,
       (coordinatesReceived) => {

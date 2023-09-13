@@ -32,6 +32,18 @@ document.addEventListener("DOMContentLoaded", () => {
     cardReaderController.finalizeWork();
     barcodeScannerController.finalizeWork();
   });
+
+  document
+    .getElementById("background-color-picker")
+    .addEventListener("change", updateBackgroundColor);
+
+  document
+    .getElementById("buttons-color-picker")
+    .addEventListener("change", updateButtonsColor);
+
+  document
+    .getElementById("peripherals-control-color-picker")
+    .addEventListener("change", updatePeripheralsControColor);
 });
 
 /**
@@ -54,6 +66,28 @@ function showDevice(deviceController) {
   peripheralsTagControl.highlightPeripheralSelected(deviceController.myId);
 }
 
+const updateBackgroundColor = function () {
+  const selectedColor = document.getElementById(
+    "background-color-picker"
+  ).value;
+  const root = document.querySelector(":root");
+  root.style.setProperty("--main-color", selectedColor);
+};
+
+const updateButtonsColor = function () {
+  const selectedColor = document.getElementById("buttons-color-picker").value;
+  const root = document.querySelector(":root");
+  root.style.setProperty("--button-color", selectedColor);
+};
+
+const updatePeripheralsControColor = function () {
+  const selectedColor = document.getElementById(
+    "peripherals-control-color-picker"
+  ).value;
+  const root = document.querySelector(":root");
+  root.style.setProperty("--white-to-black", selectedColor);
+};
+
 /**
  * Wraps the state of the toggle to represent if the dark theme is selected
  *     or not, in order to allow the operation of toggling.
@@ -73,6 +107,7 @@ const toggler = (function () {
       document.documentElement.setAttribute("page-theme", "light");
     }
   };
+
   return {
     changeTheme,
   };

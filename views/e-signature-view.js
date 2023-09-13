@@ -5,7 +5,7 @@
 export const eSignatureView = (function () {
   /**
    * Represents the e-signature's HTML code.
-   * 
+   *
    * @const {string}
    */
   const esignatureHtml = `
@@ -21,40 +21,32 @@ export const eSignatureView = (function () {
   </div>`;
 
   /**
-   * Renders the specified e-signature device type.
+   * Represents the e-signature image based type HTML code.
    */
-  const renderEsignatureImageType = function () {
-    document.getElementById("container")?.insertAdjacentHTML(
-      "beforeend",
-      `<div class="card-form">
-        <span class="subtitle">Scanned signature</span>
-        <span class="download">
-        <span>Download signature:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <a href="/assets/signature.png" download="e-signature.png">
-            e-signature.png
-          </a>
-        </span>
-      </div>`
-    );
-  };
+  const esignatureImageTypeHtml = `
+  <div class="card-form">
+    <span class="subtitle">Scanned signature</span>
+    <span class="download">
+    <span>Download signature:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <a href="/assets/signature.png" download="e-signature.png">
+      e-signature.png
+    </a>
+    </span>
+  </div>`;
 
   /**
-   * Renders the specified e-signature device type.
+   * Represents the e-signature coordinates based type HTML code.
    */
-  const renderEsignatureCoordinatesType = function () {
-    document.getElementById("container")?.insertAdjacentHTML(
-      "beforeend",
-      `<div class="card-form">
-              <span class="subtitle">Scanned signature co-ordinates</span>
-              <input type="text" name="signatureCoordinates" id="signatureCoordinates" disabled="true"/>
-              <input type="button" class="button" id="copy-button" value="Copy co-ordinates" />
-            </div>`
-    );
-  };
+  const esignatureCoordinatesTypeHtml = `
+  <div class="card-form">
+    <span class="subtitle">Scanned signature co-ordinates</span>
+    <input type="text" name="signatureCoordinates" id="signatureCoordinates" disabled="true"/>
+    <input type="button" class="button" id="copy-button" value="Copy co-ordinates" />
+  </div>`;
 
   return {
     esignatureHtml,
-    renderEsignatureImageType,
-    renderEsignatureCoordinatesType,
+    esignatureImageTypeHtml,
+    esignatureCoordinatesTypeHtml,
   };
 })();

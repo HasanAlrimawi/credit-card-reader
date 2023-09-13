@@ -14,8 +14,46 @@
     <div class="headerBar">
       <h1 id="opened-device">Peripherals List</h1>
     </div>
-    <div>
-      <input type="button" class="button" value="Change Theme" id="toggle-theme-button">
+    <div class="form-row">
+      <div class="card-form">
+        <div class="dropdown">
+          <label class="dropdown-title">Select preferred color</label>
+          <div class="dropdown-content">
+            <div class="dropdown-elements form-row">
+              <label for="background-color-picker">Background color:</label>
+              <input
+                type="color"
+                name="background-color-picker"
+                id="background-color-picker"
+              />
+            </div>
+            <div class="dropdown-elements form-row">
+              <label for="buttons-color-picker">Buttons color:</label>
+              <input
+                type="color"
+                name="buttons-color-picker"
+                id="buttons-color-picker"
+              />
+            </div>
+            <div class="dropdown-elements form-row">
+              <label for="peripherals-control-color-picker"
+                >Peripherals control color:</label
+              >
+              <input
+                type="color"
+                name="peripherals-control-color-picker"
+                id="peripherals-control-color-picker"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <input
+        type="button"
+        class="button"
+        value="Change Theme"
+        id="toggle-theme-button"
+      />
     </div>
     <section class="card" id="container">
       <custom-peripherals></custom-peripherals>
