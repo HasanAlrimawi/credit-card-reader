@@ -1,5 +1,6 @@
 import { generateCoordinates } from "../communicators/communicator.js";
 import { observer } from "../communicators/observer.js";
+import { BUTTON_STYLING } from "../constants/button-styling-constants.js";
 import { DEVICES_TITLE_ID } from "../constants/device-title-id.js";
 import { OBSERVER_TOPICS } from "../constants/observer-topics.js";
 import { eSignatureView } from "../views/e-signature-view.js";
@@ -20,6 +21,16 @@ export const eSignatureController = (function () {
    *     the peripherals tag component
    */
   const myId = DEVICES_TITLE_ID.ESIGNATURE.PERIPHERAL_ID;
+  let usedStyling_ = undefined;
+
+  // To watch any changes occuring to the theme.
+  observer.subscribe(OBSERVER_TOPICS.THEME_CHANGED, () => {
+    usedStyling_ = BUTTON_STYLING.CURRENT;
+  });
+
+  observer.subscribe(OBSERVER_TOPICS.BUTTONS_COLOR_CHANGED, () => {
+    usedStyling_ = BUTTON_STYLING.CURRENT;
+  });
 
   /**
    * Makes important changes to the e-signature UI before destruction.
@@ -121,7 +132,7 @@ export const eSignatureController = (function () {
       .getElementById(referenceElementId)
       .insertAdjacentHTML(
         insertionPosition,
-        eSignatureView.esignatureCoordinatesTypeHtml
+        eSignatureView.esignatureCoordinatesTypeHtml(usedStyling_)
       );
     document.getElementById("copy-button").addEventListener("click", copy_);
     subscriberId_ = observer.subscribe(

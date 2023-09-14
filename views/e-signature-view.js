@@ -35,14 +35,20 @@ export const eSignatureView = (function () {
   </div>`;
 
   /**
-   * Represents the e-signature coordinates based type HTML code.
+   * Returns the e-signature coordinates based type HTML code.
+   *
+   * @param {!object} themeUsed Holds the value of the BUTTON_STYLING.CURRENT
+   *     constant
    */
-  const esignatureCoordinatesTypeHtml = `
-  <div class="card-form">
-    <span class="subtitle">Scanned signature co-ordinates</span>
-    <input type="text" name="signatureCoordinates" id="signatureCoordinates" disabled="true"/>
-    <input type="button" class="button" id="copy-button" value="Copy co-ordinates" />
-  </div>`;
+  const esignatureCoordinatesTypeHtml = function (themeUsed) {
+    return `
+    <div class="card-form">
+      <span class="subtitle">Scanned signature co-ordinates</span>
+      <input type="text" name="signatureCoordinates" id="signatureCoordinates" disabled="true"/>
+      <custom-button background-color="${themeUsed?.BACKGROUND_COLOR}" hover-background-color="${themeUsed?.HOVER_BACKGROUND_COLOR}"
+        id="copy-button" value="Copy co-odrinates"></custom-button>
+    </div>`;
+  };
 
   return {
     esignatureHtml,

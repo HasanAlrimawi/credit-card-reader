@@ -28,22 +28,27 @@ export const barcodeScannerView = (function () {
   };
 
   /**
-   * Represents the barcode scanner's HTML code.
-   * 
-   * @const {string}
+   * Returns the barcode scanner's HTML code.
+   *
+   * @param {!object} themeUsed Holds the value of the BUTTON_STYLING.CURRENT
+   *     constant
    */
-  const barcodeScannerHtml = `
-  <div class="card-form">
-    <span class="subtitle">Scanned products</span>
-    <ul id="list-of-scanned-products"></ul>
-  </div>
-  <div class="card-form">
-    <span class="subtitle">Control</span>
-    <div class="form-row">
-        <input type="button" id="scan-button" class="button" value="Scan" />
-        <input type="button" id="clear-button" class="button" value="Clear" />
+  const barcodeScannerHtml = function (themeUsed) {
+    return `
+    <div class="card-form">
+      <span class="subtitle">Scanned products</span>
+      <ul id="list-of-scanned-products"></ul>
     </div>
-  </div>`;
+    <div class="card-form">
+      <span class="subtitle">Control</span>
+      <div class="form-row">
+        <custom-button background-color="${themeUsed?.BACKGROUND_COLOR}" hover-background-color="${themeUsed?.HOVER_BACKGROUND_COLOR}"
+          id="scan-button" class="button" value="Scan"> </custom-button>
+        <custom-button background-color="${themeUsed?.BACKGROUND_COLOR}" hover-background-color="${themeUsed?.HOVER_BACKGROUND_COLOR}"
+          id="clear-button" class="button" value="Clear"> </custom-button>
+      </div>
+    </div>`;
+  };
 
   return {
     barcodeScannerHtml,

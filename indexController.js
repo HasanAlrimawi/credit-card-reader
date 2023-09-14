@@ -1,4 +1,7 @@
+import { observer } from "./communicators/observer.js";
+import { BUTTON_STYLING } from "./constants/button-styling-constants.js";
 import { ELEMENT_INSERTION_POSITION } from "./constants/element-insertion-positions.js";
+import { OBSERVER_TOPICS } from "./constants/observer-topics.js";
 import { barcodeScannerController } from "./controllers/barcode-scanner-controller.js";
 import { cardReaderController } from "./controllers/card-reader-controller.js";
 import { eSignatureController } from "./controllers/e-signature-controller.js";
@@ -136,8 +139,12 @@ const updateBackgroundColor = function (colorPickerId) {
  */
 const updateButtonsColor = function (colorPickerId) {
   const selectedColor = document.getElementById(colorPickerId).value;
-  const root = document.querySelector(":root");
-  root.style.setProperty("--button-color", selectedColor);
+  observer.publish(OBSERVER_TOPICS.BUTTONS_COLOR_CHANGED, "");
+  BUTTON_STYLING.CURRENT.BACKGROUND_COLOR = selectedColor;
+  const buttons = document.getElementsByTagName("custom-button");
+  for (const button of buttons) {
+    button.setAttribute("background-color", selectedColor);
+  }
 };
 
 /**
@@ -164,10 +171,24 @@ const toggler = (function () {
    */
   const changeTheme = function () {
     toggleState_ = !toggleState_;
+    const buttons = document.getElementsByTagName("custom-button");
+
     if (toggleState_) {
       document.documentElement.setAttribute("page-theme", "dark");
+      BUTTON_STYLING.setCurrentToDark();
+      observer.publish(OBSERVER_TOPICS.THEME_CHANGED, "");
+      for (const button of buttons) {
+        button.setAttribute("background-color", "#da0b0b");
+        button.setAttribute("hover-background-color", "#8b0000");
+      }
     } else {
       document.documentElement.setAttribute("page-theme", "light");
+      BUTTON_STYLING.setCurrentToLight();
+      observer.publish(OBSERVER_TOPICS.THEME_CHANGED, "");
+      for (const button of buttons) {
+        button.setAttribute("background-color", "#007bff");
+        button.setAttribute("hover-background-color", "#0056b3");
+      }
     }
   };
 

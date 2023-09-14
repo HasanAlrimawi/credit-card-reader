@@ -4,6 +4,7 @@ import { publishProductBarcodes } from "../communicators/communicator.js";
 import { observer } from "../communicators/observer.js";
 import { OBSERVER_TOPICS } from "../constants/observer-topics.js";
 import { DEVICES_TITLE_ID } from "../constants/device-title-id.js";
+import { BUTTON_STYLING } from "../constants/button-styling-constants.js";
 
 /**
  * @fileoverview Connects both the view and the model of the barcode scanner
@@ -22,6 +23,16 @@ export const barcodeScannerController = (function () {
    *     the peripherals tag component
    */
   const myId = DEVICES_TITLE_ID.BARCODE_SCANNER.PERIPHERAL_ID;
+  let usedStyling_ = undefined;
+
+  // To watch any changes occuring to the theme.
+  observer.subscribe(OBSERVER_TOPICS.THEME_CHANGED, () => {
+    usedStyling_ = BUTTON_STYLING.CURRENT;
+  });
+
+  observer.subscribe(OBSERVER_TOPICS.BUTTONS_COLOR_CHANGED, () => {
+    usedStyling_ = BUTTON_STYLING.CURRENT;
+  })
 
   /**
    * Makes important changes to the barcode UI before destruction.
@@ -75,7 +86,7 @@ export const barcodeScannerController = (function () {
       .getElementById(referenceElementId)
       .insertAdjacentHTML(
         insertionPosition,
-        barcodeScannerView.barcodeScannerHtml
+        barcodeScannerView.barcodeScannerHtml(usedStyling_)
       );
 
     subscriberId_ = observer.subscribe(
