@@ -38,11 +38,13 @@ export const cardReaderView = (function () {
   };
 
   /**
-   * Represents the card reader's HTML code.
-   * 
-   * @const {string}
+   * Returns the card reader's HTML code.
+   *
+   * @param {!object} themeUsed Holds the value of the BUTTON_STYLING.CURRENT
+   *     constant
    */
-  const cardReaderHtml = `<div class="card-form">
+  const cardReaderHtml = function (themeUsed) {
+    return `<div class="card-form">
   <div class="form-row">
     <div class="form-group">
       <span class="label">First Name</span>
@@ -78,7 +80,11 @@ export const cardReaderView = (function () {
       <input type="text" name="cardDetails" id="country-code" />
     </div>
   </div>
+  <custom-button value="Scan card" id="scan-card-button"
+  background-color="${themeUsed?.BACKGROUND_COLOR}"
+  hover-background-color="${themeUsed?.HOVER_BACKGROUND_COLOR}"></custom-button>
 </div>`;
+  };
 
   return {
     autoFillForm,

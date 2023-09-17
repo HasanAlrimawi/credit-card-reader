@@ -5,6 +5,7 @@ import { observer } from "../communicators/observer.js";
 import { CardDetailsException } from "../exceptions/card-details-exception.js";
 import { OBSERVER_TOPICS } from "../constants/observer-topics.js";
 import { DEVICES_TITLE_ID } from "../constants/device-title-id.js";
+import { BUTTON_STYLING } from "../constants/button-styling-constants.js";
 
 /**
  * @fileoverview Connects both the view and the model of the card reader,
@@ -21,6 +22,17 @@ export const cardReaderController = (function () {
    *     the peripherals tag component
    */
   const myId = DEVICES_TITLE_ID.CARD_READER.PERIPHERAL_ID;
+  /** {?object<string>}  represents the butoon styling specified */
+  let usedStyling_ = undefined;
+
+  // To watch any changes occuring to the theme.
+  observer.subscribe(OBSERVER_TOPICS.THEME_CHANGED, () => {
+    usedStyling_ = BUTTON_STYLING.CURRENT;
+  });
+
+  observer.subscribe(OBSERVER_TOPICS.BUTTONS_COLOR_CHANGED, () => {
+    usedStyling_ = BUTTON_STYLING.CURRENT;
+  });
 
   /**
    * Makes important changes to the card reader UI before destruction.
@@ -71,7 +83,7 @@ export const cardReaderController = (function () {
   const renderView = function (referenceElementId, insertionPosition) {
     document
       .getElementById(referenceElementId)
-      .insertAdjacentHTML(insertionPosition, cardReaderView.cardReaderHtml);
+      .insertAdjacentHTML(insertionPosition, cardReaderView.cardReaderHtml(usedStyling_));
 
     subscriberId_ = observer.subscribe(
       OBSERVER_TOPICS.CARD_READER_TOPIC,
@@ -79,6 +91,15 @@ export const cardReaderController = (function () {
         updateCardReaderViewAndModel_(magneticStripeRead);
       }
     );
+
+    document
+      .getElementById("scan-card-button")
+      .addEventListener("click", () => {
+        observer.publish(
+          OBSERVER_TOPICS.CARD_READER_TOPIC,
+          "%B5934 5678 9101 1223564Alrimawi/Hasan Mohammed.works^1226hello?;5934 5678 9101 1223=5641226hello?"
+        );
+      });
   };
 
   return {
