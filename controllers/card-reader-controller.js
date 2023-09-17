@@ -11,8 +11,6 @@ import { DEVICES_TITLE_ID } from "../constants/device-title-id.js";
  * exposes function to handle the device when view rendered and destroyed,
  * it also uses the communicator to make interaction with the device
  * and uses the observer pattern to listen to any data sent by the device.
- *
- * @public
  */
 export const cardReaderController = (function () {
   /** @private {number} */

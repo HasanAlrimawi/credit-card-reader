@@ -1,3 +1,7 @@
+/**
+ * Wraps the observer's topics constants within an object to ease access
+ * and prevent typos.
+ */
 export const OBSERVER_TOPICS = Object.freeze({
   BARCODE_TOPIC: "BARCODE_NEW_PRODUCT_SCANNED",
   CARD_READER_TOPIC: "MAGNETIC_CARD_READ",

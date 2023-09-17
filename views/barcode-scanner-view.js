@@ -30,7 +30,7 @@ export const barcodeScannerView = (function () {
   /**
    * Returns the barcode scanner's HTML code.
    *
-   * @param {!object} themeUsed Holds the value of the BUTTON_STYLING.CURRENT
+   * @param {!object<string> | undefined} themeUsed Holds the value of the BUTTON_STYLING.CURRENT
    *     constant
    */
   const barcodeScannerHtml = function (themeUsed) {

@@ -1,7 +1,6 @@
 /**
  * @fileoverview Implements observer pattern implementation
  *     (subscribe, unsubscribe, publish)
- * @public
  */
 export const observer = (function () {
   /** @type {number} */

@@ -3,7 +3,7 @@
  * the access and modification of the products list model.
  */
 export const productsList = (function () {
-  /** @private {string[]} */
+  /** @private {array<number>} */
   let productsScannedList_ = [];
 
   /**
@@ -20,8 +20,8 @@ export const productsList = (function () {
    *     object holding the products scanned.
    *
    * @memberof productsList
-   * 
-   * @param {string} newProductScanned 
+   *
+   * @param {string} newProductScanned
    */
   function appendToList(newProductScanned) {
     productsScannedList_.push(newProductScanned);

@@ -8,31 +8,32 @@ import { BUTTON_STYLING } from "../constants/button-styling-constants.js";
 
 /**
  * @fileoverview Connects both the view and the model of the barcode scanner
- * exposes function to handle the device when view rendered and destroyed,
+ * exposes function to handle the device when view is rendered and destroyed,
  * it also uses the communicator to make interaction with the device
  * and uses the observer pattern to listen to any data sent by the device.
- *
- * @public
  */
 export const barcodeScannerController = (function () {
   /** @type {number} */
   let subscriberId_ = undefined;
   /** @type {string} represents the title that represents the device */
   const myTitle = DEVICES_TITLE_ID.BARCODE_SCANNER.TITLE;
-  /** @type {string} represents the id that represents the device's title
+  /** @type {string} represents the id that represents the device's title in
    *     the peripherals tag component
    */
   const myId = DEVICES_TITLE_ID.BARCODE_SCANNER.PERIPHERAL_ID;
+  /** @type {object<string, string>} */
   let usedStyling_ = undefined;
 
   // To watch any changes occuring to the theme.
   observer.subscribe(OBSERVER_TOPICS.THEME_CHANGED, () => {
     usedStyling_ = BUTTON_STYLING.CURRENT;
   });
-
+  // the button styling is addressed within two observer topics since it
+  // should be handled in the case of theme change as a whole or specific
+  // button change in specific
   observer.subscribe(OBSERVER_TOPICS.BUTTONS_COLOR_CHANGED, () => {
     usedStyling_ = BUTTON_STYLING.CURRENT;
-  })
+  });
 
   /**
    * Makes important changes to the barcode UI before destruction.
@@ -65,7 +66,6 @@ export const barcodeScannerController = (function () {
    *
    * @see productsList.clearList, barcodeScannerView.clearProductsList
    *
-   * @param {string} productCode
    */
   const clearProductsList_ = function () {
     productsList.clearList();

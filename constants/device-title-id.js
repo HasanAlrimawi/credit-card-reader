@@ -1,3 +1,7 @@
+/**
+ * Wraps the the devices supported title and specified Id within the list
+ * shown in the app, to ease access and prevent typos.
+ */
 export const DEVICES_TITLE_ID = Object.freeze({
   CARD_READER: Object.freeze({
     TITLE: "Card Reader",

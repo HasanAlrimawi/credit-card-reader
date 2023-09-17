@@ -16,7 +16,7 @@ class CustomButton extends HTMLElement {
     <input
         type="button"
         class="button"
-        value="${value == undefined ? "Default" : value}"
+        value="${value === null || value === undefined ? "Default" : value}"
       />
     `;
   }

@@ -9,8 +9,6 @@ import { eSignatureView } from "../views/e-signature-view.js";
  * @fileoverview Exposes functions to handle the device when view rendered and
  * destroyed,it also uses the communicator to make interaction with the device
  * and uses the observer pattern to listen to any data sent by the device.
- *
- * @public
  */
 export const eSignatureController = (function () {
   /** @private {number} */
@@ -21,6 +19,7 @@ export const eSignatureController = (function () {
    *     the peripherals tag component
    */
   const myId = DEVICES_TITLE_ID.ESIGNATURE.PERIPHERAL_ID;
+  /** {?object<string>}  represents the butoon styling specified */
   let usedStyling_ = undefined;
 
   // To watch any changes occuring to the theme.
@@ -93,6 +92,11 @@ export const eSignatureController = (function () {
    *
    * @see clearSelection_, observer.subscribe,
    *     eSignatureView.renderEsignatureImageType, observer.unsubscribe
+   * 
+   * @param {string} referenceElementId Represents the element's id where the
+   *     device HTML will be rendered in reference to
+   * @param {string} insertionPosition Reperesents the position where to insert
+   *     device's HTML in reference to the element specified
    */
   const renderImageBased_ = function (referenceElementId, insertionPosition) {
     clearSelection_();
@@ -121,6 +125,11 @@ export const eSignatureController = (function () {
    *
    * @see clearSelection_, observer.unsubscribe, generateCoordinates,
    *     eSignatureView.renderEsignatureCoordinatesType, observer.subscribe
+   *
+   * @param {string} referenceElementId Represents the element's id where the
+   *     device HTML will be rendered in reference to
+   * @param {string} insertionPosition Reperesents the position where to insert
+   *     device's HTML in reference to the element specified
    */
   const renderCoordinatesBased_ = function (
     referenceElementId,

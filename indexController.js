@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
  * @see indexView.clearPrecedingDevice, indexView.updateTitle,
  *     peripheralsTagControl.highlightPeripheralSelected
  *
- * @param {object} deviceController Represents the selected device's controller.
+ * @param {!object} deviceController Represents the selected device's controller.
  */
 function showDevice(deviceController) {
   indexView.clearPrecedingDevice();
