@@ -25,8 +25,36 @@ export const indexView = (function () {
     }
   }
 
+  /**
+   * Adds a color picker with its label to the dropdown list
+   *     for selecting the preferred color.
+   * @param {string} pickerTitle Represents the name of
+   *     what will get colored upon selection
+   * @param {string} pickerId Represents the id of the element that will be colored
+   */
+  const addColorPicker = function (pickerTitle, pickerId) {
+    const dropdownContentDiv = document.getElementById(
+      "dropdown-content-holder"
+    );
+    const rowElementsHolderDiv = document.createElement("div");
+    const pickerTitleLabel = document.createElement("label");
+    const colorPickerInput = document.createElement("input");
+
+    rowElementsHolderDiv.setAttribute("class", "dropdown-elements form-row");
+    pickerTitleLabel.setAttribute("for", pickerId);
+    pickerTitleLabel.textContent = pickerTitle;
+    colorPickerInput.setAttribute("type", "color");
+    colorPickerInput.setAttribute("name", pickerId);
+    colorPickerInput.setAttribute("id", pickerId);
+
+    rowElementsHolderDiv.appendChild(pickerTitleLabel);
+    rowElementsHolderDiv.appendChild(colorPickerInput);
+    dropdownContentDiv.appendChild(rowElementsHolderDiv);
+  };
+
   return {
-    updateTitle: updateTitle,
-    clearPrecedingDevice: clearPrecedingDevice,
+    updateTitle,
+    clearPrecedingDevice,
+    addColorPicker,
   };
 })();

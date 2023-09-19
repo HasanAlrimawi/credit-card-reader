@@ -3,22 +3,20 @@
  * the access and modification of the cardDetails model.
  */
 export const cardDetails = (function () {
-  /** @private {string} */
+  /** @private {CardInformation} */
   let cardDetails_;
 
   /**
    * Returns the private attribute value that holds the card information data.
    *
-   * @returns { !CardInformation } the object containing the private attribute
-   *     representing card information.
+   * @returns { !CardInformation } The object containing details of the card.
    */
   function getCardDetails() {
     return cardDetails_;
   }
 
   /**
-   * Manipulates the private attribute content that holds
-   *     the card information data.
+   * Updates the attributes of the card details saved.
    *
    * @param {!CardInformation} newCardDetails
    */

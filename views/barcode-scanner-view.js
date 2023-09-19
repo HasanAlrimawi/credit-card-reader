@@ -1,6 +1,6 @@
 /**
  * @fileoverview Provides functionality to render/update the view of
- * the barcode scanner view.
+ * the barcode scanner.
  */
 export const barcodeScannerView = (function () {
   /**
@@ -12,7 +12,7 @@ export const barcodeScannerView = (function () {
    */
   const addProductCode = function (productCode) {
     const newProductBarcode = document.createElement("li");
-    newProductBarcode.innerHTML = productCode;
+    newProductBarcode.textContent = productCode;
     document
       .getElementById("list-of-scanned-products")
       .appendChild(newProductBarcode);

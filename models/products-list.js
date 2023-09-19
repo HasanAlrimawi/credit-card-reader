@@ -1,5 +1,5 @@
 /**
- * @fileoverview Applies the revealing module pattern in order to organize
+ * @fileoverview Provides functionality to organize
  * the access and modification of the products list model.
  */
 export const productsList = (function () {

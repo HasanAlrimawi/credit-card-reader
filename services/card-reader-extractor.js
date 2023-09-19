@@ -2,7 +2,7 @@ import { CardDetailsException } from "../exceptions/card-details-exception.js";
 import { CardInformation } from "../models/card-information.js";
 
 /**
- * @fileoverview This module provides functionality to get the data stored on
+ * @fileoverview Provides functionality to get the data stored on
  * the magnetic stripe's tracks, wrapped in an object containing the data in
  * a clear way.
  */
@@ -14,7 +14,7 @@ export const cardDetailsService = (function () {
    * It extracts the data from the two tracks one by one, then makes sure that
    *     the shared data across the tracks are the same in order to return
    *     the card information or throw exception to indicate some problem
-   *     with the card reader or the card itself
+   *     with the card reader or the card itself.
    *
    * @see extractFirstTrackData_, extractSecondTrackData_, checkCorrespondance_
    *

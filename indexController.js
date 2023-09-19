@@ -64,6 +64,7 @@ function showDevice(deviceController) {
  *     the color pickers needed accompanied with their event listeners.
  */
 const renderColorPickers = function () {
+  // defined color pickers' labels, ids and callbacks when pressed
   const colorPickers = [
     {
       title: "Background color:",
@@ -89,7 +90,7 @@ const renderColorPickers = function () {
   ];
 
   for (const picker of colorPickers) {
-    addColorPicker(picker.title, picker.id);
+    indexView.addColorPicker(picker.title, picker.id);
     document
       .getElementById(picker.id)
       .addEventListener("change", picker.changeEventHandler);
@@ -97,32 +98,7 @@ const renderColorPickers = function () {
 };
 
 /**
- * Adds a color picker with its label to the dropdown list
- *     for selecting the preferred color.
- * @param {string} pickerTitle Represents the name of
- *     what will get colored upon selection
- * @param {string} pickerId Represents the id of the element that will be colored
- */
-const addColorPicker = function (pickerTitle, pickerId) {
-  const dropdownContentDiv = document.getElementById("dropdown-content-holder");
-  const rowElementsHolderDiv = document.createElement("div");
-  const pickerTitleLabel = document.createElement("label");
-  const colorPickerInput = document.createElement("input");
-
-  rowElementsHolderDiv.setAttribute("class", "dropdown-elements form-row");
-  pickerTitleLabel.setAttribute("for", pickerId);
-  pickerTitleLabel.textContent = pickerTitle;
-  colorPickerInput.setAttribute("type", "color");
-  colorPickerInput.setAttribute("name", pickerId);
-  colorPickerInput.setAttribute("id", pickerId);
-
-  rowElementsHolderDiv.appendChild(pickerTitleLabel);
-  rowElementsHolderDiv.appendChild(colorPickerInput);
-  dropdownContentDiv.appendChild(rowElementsHolderDiv);
-};
-
-/**
- * Will reset the color of the background as selected by the user.
+ * Will set the color of the background as selected by the user.
  * @param {string} colorPickerId Represents the id of the element that
  *     will be colored
  */
@@ -133,7 +109,7 @@ const updateBackgroundColor = function (colorPickerId) {
 };
 
 /**
- * Will reset the color of the background as selected by the user.
+ * Will set the color of the background as selected by the user.
  * @param {string} colorPickerId Represents the id of the element that
  *     will be colored
  */
@@ -148,7 +124,7 @@ const updateButtonsColor = function (colorPickerId) {
 };
 
 /**
- * Will reset the color of the background as selected by the user.
+ * Will set the color of the background as selected by the user.
  * @param {string} colorPickerId Represents the id of the element that
  *     will be colored
  */
@@ -167,7 +143,7 @@ const toggler = (function () {
   let toggleState_ = false;
 
   /**
-   * toggles the theme selected, by changing a document attribute.
+   * toggles the theme selected.
    */
   const changeTheme = function () {
     toggleState_ = !toggleState_;
@@ -182,7 +158,7 @@ const toggler = (function () {
         button.setAttribute("hover-background-color", "#8b0000");
       }
     } else {
-      document.documentElement.setAttribute("page-theme", "light");
+      document.documentElement.setAttribute("page-theme", "");
       BUTTON_STYLING.setCurrentToLight();
       observer.publish(OBSERVER_TOPICS.THEME_CHANGED, "");
       for (const button of buttons) {

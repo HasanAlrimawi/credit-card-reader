@@ -1,6 +1,6 @@
 /**
  * @fileoverview Provides functionality to render/update the view of
- * the e-signature view.
+ * the e-signature.
  */
 export const eSignatureView = (function () {
   /**

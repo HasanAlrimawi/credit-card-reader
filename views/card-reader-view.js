@@ -1,6 +1,6 @@
 /**
  * @fileoverview Provides functionality to render/update the view of
- * the card reader view.
+ * the card reader.
  */
 export const cardReaderView = (function () {
   /**

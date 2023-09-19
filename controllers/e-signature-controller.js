@@ -19,7 +19,7 @@ export const eSignatureController = (function () {
    *     the peripherals tag component
    */
   const myId = DEVICES_TITLE_ID.ESIGNATURE.PERIPHERAL_ID;
-  /** {?object<string>}  represents the butoon styling specified */
+  /** {?object<string>}  represents the button styling specified */
   let usedStyling_ = undefined;
 
   // To watch any changes occuring to the theme.
@@ -50,25 +50,26 @@ export const eSignatureController = (function () {
    * Updates the e-Signature view.
    *
    * @param {string} type Represents the type of the e-signature used
-   * @param {string} eSignature Represents the string read from the e-signature
-   *     device
+   * @param {string} data Represents the string read from the co-ordinates
+   *     e-signature device or some kind of data related to
+   *     image based e-signature.
    */
-  const updateEsignatureView_ = function (type, eSignature) {
+  const updateEsignatureView_ = function (type, data) {
     if (type === "imageBased") {
     } else if (type === "coordinatesBased") {
-      document.getElementById("signatureCoordinates").value = eSignature;
+      document.getElementById("signatureCoordinates").value = data;
     }
   };
 
   /**
    * Renders the e-signature page, highlights the peripheral
-   *     selected, and omits event listeners where needed.
+   *     selected, and emits event listeners where needed.
    *
    * @see renderImageBased_, renderCoordinatesBased_
    * @param {string} referenceElementId Represents the element id who will be
-   *     used as a reference to add the HTML code
+   *     used as a reference to insert the HTML code
    * @param {string} insertionPosition Defines the location where the HTML code
-   *     will be added to the reference element's perspective
+   *     will be inserted to the reference element's perspective
    */
   const renderView = function (referenceElementId, insertionPosition) {
     document

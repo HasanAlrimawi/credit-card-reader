@@ -73,8 +73,7 @@ export const barcodeScannerController = (function () {
   };
 
   /**
-   * Renders the barcode scanner page, highlights
-   *     the peripheral selected, and makes subscription.
+   * Renders the barcode scanner page and makes subscription.
    *
    * @param {string} referenceElementId Represents the element id who will be
    *     used as a reference to add the HTML code

@@ -22,7 +22,7 @@ export const cardReaderController = (function () {
    *     the peripherals tag component
    */
   const myId = DEVICES_TITLE_ID.CARD_READER.PERIPHERAL_ID;
-  /** {?object<string>}  represents the butoon styling specified */
+  /** {?object<string>}  represents the button styling specified */
   let usedStyling_ = undefined;
 
   // To watch any changes occuring to the theme.
@@ -76,9 +76,9 @@ export const cardReaderController = (function () {
    * @see makeSubscription_
    *
    * @param {string} referenceElementId Represents the element id who will be
-   *     used as a reference to add the HTML code
+   *     used as a reference to insert the HTML code
    * @param {string} insertionPosition Defines the location where the HTML code
-   *     will be added to the reference element's perspective
+   *     will be inserted to the reference element's perspective
    */
   const renderView = function (referenceElementId, insertionPosition) {
     document
