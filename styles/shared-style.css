@@ -88,6 +88,11 @@ input[type="text"] {
   border-radius: 4px;
   font-size: 14px;
   background-color: var(--white-to-black);
+  text-wrap: wrap;
+}
+
+#list-of-scanned-products input[type="text"] {
+  width: 10em;
 }
 
 .peripherals-list {
