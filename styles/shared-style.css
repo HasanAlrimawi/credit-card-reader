@@ -179,3 +179,22 @@ li {
   cursor: pointer;
   color: #000;
 }
+
+#signature-img {
+  width: 200px;
+  height: 200px;
+}
+
+#coordinate-signature-renderer {
+  width: 200px;
+  height: 100px;
+  background-color: #9dddf0;
+}
+
+.hidden {
+  display: none;
+}
+
+#scan-signature-button {
+  margin-left: 10px;
+}

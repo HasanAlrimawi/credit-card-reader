@@ -8,17 +8,24 @@ export const eSignatureView = (function () {
    *
    * @const {string}
    */
-  const esignatureHtml = `
-  <div class="card-form">
-    <span class="subtitle">E-Signature type</span>
-    <div class="dropdown">
-      <span class="dropdown-title">Select type</span>
-      <div class="dropdown-content">
-        <p class="dropdown-elements" id="image-based">Image based</p>
-        <p class="dropdown-elements" id="coordinates-based">Coordinates based</p>
+  const esignatureHtml = function (themeUsed) {
+    return `
+      <div class="card-form">
+      <span class="subtitle">E-Signature type</span>
+      <div class="dropdown">
+        <span class="dropdown-title">Select type</span>
+        <div class="dropdown-content">
+          <p class="dropdown-elements" id="image-based">Image based</p>
+          <p class="dropdown-elements" id="coordinates-based">Coordinates based</p>
+        </div>
       </div>
-    </div>
-  </div>`;
+      <custom-button value="Scan" id="scan-signature-button"
+        background-color="${themeUsed?.BACKGROUND_COLOR}"
+        hover-background-color="${themeUsed?.HOVER_BACKGROUND_COLOR}"
+        class="hidden">
+      </custom-button>
+    </div>`;
+  };
 
   /**
    * Represents the e-signature image based type HTML code.
@@ -27,11 +34,9 @@ export const eSignatureView = (function () {
   <div class="card-form">
     <span class="subtitle">Scanned signature</span>
     <span class="download">
-    <span>Download signature:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-    <a href="/assets/signature.png" download="e-signature.png">
-      e-signature.png
-    </a>
+    <a id="signature-download" href="" download="e-signature.png"></a>
     </span>
+    <img id="signature-img" alt="">
   </div>`;
 
   /**
@@ -45,8 +50,9 @@ export const eSignatureView = (function () {
     <div class="card-form">
       <span class="subtitle">Scanned signature co-ordinates</span>
       <input type="text" name="signatureCoordinates" id="signatureCoordinates" disabled="true"/>
+      <div id="coordinate-signature-renderer"></div>
       <custom-button background-color="${themeUsed?.BACKGROUND_COLOR}" hover-background-color="${themeUsed?.HOVER_BACKGROUND_COLOR}"
-        id="copy-button" value="Copy co-odrinates"></custom-button>
+        id="copy-button" value="Copy co-ordinates"></custom-button>
     </div>`;
   };
 

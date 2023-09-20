@@ -34,6 +34,9 @@ export const generateCoordinates = function () {
   );
 };
 
+export const generateImage = function () {
+  observer.publish("IMAGE_ESIGNATURE_RECEIVED", "/assets/signature.png");
+};
 
 //%B5934 5678 9101 1223564Alrimawi/Hasan Mohammed.works^1226hello?;5934 5678 9101 1223=5641226hello?
 //%B1234 5678 9101 1223Alrimawi/Hasan^1226?;1234 5678 9101 1223=1226?
