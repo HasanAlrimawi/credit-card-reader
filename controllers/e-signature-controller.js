@@ -1,4 +1,7 @@
-import { generateCoordinates } from "../communicators/communicator.js";
+import {
+  generateCoordinates,
+  generateImage,
+} from "../communicators/communicator.js";
 import { observer } from "../communicators/observer.js";
 import { BUTTON_STYLING } from "../constants/button-styling-constants.js";
 import { DEVICES_TITLE_ID } from "../constants/device-title-id.js";
@@ -56,8 +59,15 @@ export const eSignatureController = (function () {
    */
   const updateEsignatureView_ = function (type, data) {
     if (type === "imageBased") {
+      const linkElement = document.getElementById("signature-download");
+      const image = document.getElementById("signature-img");
+      linkElement.setAttribute("href", data);
+      linkElement.textContent = "Download e-signature.png";
+      image.setAttribute("src", data);
     } else if (type === "coordinatesBased") {
       document.getElementById("signatureCoordinates").value = data;
+      document.getElementById("coordinate-signature-renderer").textContent =
+        "Render the signature here (todo)";
     }
   };
 
@@ -72,18 +82,35 @@ export const eSignatureController = (function () {
    *     will be inserted to the reference element's perspective
    */
   const renderView = function (referenceElementId, insertionPosition) {
+    let currentType = "";
     document
       .getElementById(referenceElementId)
-      .insertAdjacentHTML(insertionPosition, eSignatureView.esignatureHtml);
+      .insertAdjacentHTML(
+        insertionPosition,
+        eSignatureView.esignatureHtml(usedStyling_)
+      );
 
+    const scanButton = document.getElementById("scan-signature-button");
     document.getElementById("image-based").addEventListener("click", () => {
+      currentType = "IMAGE_BASED";
       renderImageBased_(referenceElementId, insertionPosition);
+      scanButton.classList.remove("hidden");
     });
     document
       .getElementById("coordinates-based")
       .addEventListener("click", () => {
+        currentType = "COORDINATES_BASED";
         renderCoordinatesBased_(referenceElementId, insertionPosition);
+        scanButton.classList.remove("hidden");
       });
+
+    scanButton?.addEventListener("click", () => {
+      if (currentType === "IMAGE_BASED") {
+        generateImage();
+      } else if (currentType === "COORDINATES_BASED") {
+        generateCoordinates();
+      }
+    });
   };
 
   /**
@@ -93,7 +120,7 @@ export const eSignatureController = (function () {
    *
    * @see clearSelection_, observer.subscribe,
    *     eSignatureView.renderEsignatureImageType, observer.unsubscribe
-   * 
+   *
    * @param {string} referenceElementId Represents the element's id where the
    *     device HTML will be rendered in reference to
    * @param {string} insertionPosition Reperesents the position where to insert
@@ -151,7 +178,6 @@ export const eSignatureController = (function () {
         updateEsignatureView_("coordinatesBased", coordinatesReceived);
       }
     );
-    generateCoordinates();
   };
 
   /**
