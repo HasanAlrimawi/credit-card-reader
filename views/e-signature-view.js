@@ -36,7 +36,9 @@ export const eSignatureView = (function () {
     <span class="download">
     <a id="signature-download" href="" download="e-signature.png"></a>
     </span>
-    <img id="signature-img" alt="">
+    <div id="signature-wrapper">
+      <img id="signature-img" alt="Signature to be scanned">
+    </div
   </div>`;
 
   /**

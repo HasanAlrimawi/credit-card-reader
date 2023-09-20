@@ -203,3 +203,7 @@ li {
 #scan-signature-button {
   margin-left: 10px;
 }
+
+#signature-wrapper{
+  background-color: #fff;
+}
