@@ -56,6 +56,9 @@ export const barcodeScannerView = (function () {
    *     constant
    */
   const barcodeScannerHtml = function (themeUsed) {
+    // As this function gets called then that means the device's page will
+    // get its first scan
+    firstScan_ = true;
     return `
     <div class="card-form">
       <span class="subtitle">Scanned products</span>
