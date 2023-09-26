@@ -8,9 +8,6 @@ import { eSignatureController } from "./controllers/e-signature-controller.js";
 import { indexView } from "./indexView.js";
 import { peripheralsTagControl } from "./ui-components/peripherals.js";
 
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("./service-worker.js");
-}
 /**
  * @fileoverview Provides functionality to control how and when to render
  * any of the devices' views.
